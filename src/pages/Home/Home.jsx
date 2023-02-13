@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <>
       <Navber />
-      <div className="grid grid-cols-12 gap-5">
-        <div className="col-span-3 min-h-screen">
+      <div className="grid grid-cols-12 gap-5 bg-gray-200">
+        <div className="col-span-3 min-h-screen border-r-2 overflow-scroll bg-white">
           <Sidebar />
         </div>
         <div className="col-span-6 ">

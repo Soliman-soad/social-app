@@ -1,7 +1,13 @@
 import React from 'react'
+import Post from '../Items/Post'
 
 export default function Newsfeed() {
   return (
-    <div>this is Newsfeed</div>
+    <div >
+      <Post/>
+      <Post/>
+      <Post/>
+      <Post/>
+    </div>
   )
 }
