@@ -15,7 +15,7 @@ export default function Navber() {
         </div>
 		<div className='flex basis-6/12  w-full bg-white rounded-full p-2 h-10 items-center text-lg'>
 			<BiSearchAlt2/>
-			<input type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full'/>
+			<input type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full border-none outline-none'/>
 		</div>
 		<div className='flex justify-around basis-3/12'>
         <ul className="items-stretch hidden space-x-3 lg:flex">
