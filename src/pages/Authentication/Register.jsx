@@ -56,8 +56,12 @@ const Register = () => {
             <label htmlFor="password" className="block mb-2 font-semibold">Password</label>
             <input type="password" name="password" placeholder="Enter your password"  className="w-full p-3 "/>
           </div>
+          <div>
+            <label htmlFor="img" className="block mb-2 font-semibold">Image </label>
+            <input type="file" name="img" placeholder="Enter your password"  className="file:w-full file:bg-white file:border-dashed file:px-20 file:py-6  file:rounded-sm "/>
+          </div>
           
-          <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Log in</button>
+          <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Sign up</button>
           <p className="text-center font-medium">
             Already have account? <a href="#" className="text-orange-600">sign in</a>
           </p>

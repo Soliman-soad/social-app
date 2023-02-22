@@ -53,7 +53,7 @@ const Login = () => {
             <input type="password" name="password" placeholder="Enter your password"  className="w-full p-3 "/>
           </div>
           
-          <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Log in</button>
+          <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Log in </button>
           <p className="text-center font-medium">
             Don't have account? <a href="#" className="text-orange-600">sign up</a>
           </p>

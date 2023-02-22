@@ -3,6 +3,7 @@ import './App.css';
 import Login from './pages/Authentication/Login';
 import Register from './pages/Authentication/Register';
 import Home from './pages/Home/Home';
+import Profile from './pages/Profile/Profile';
 
 function App() {
   const route = createBrowserRouter([
@@ -18,6 +19,10 @@ function App() {
 {
   path:'/register',
   element: <Register/>
+},
+{
+  path:'/profile',
+  element:<Profile/>
 }
   ])
 
