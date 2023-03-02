@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();  
+  const formSubmit = data =>{
+    console.log(data)
+  }
     const settings = {
         dots: true,
         infinite: true,
@@ -43,14 +48,16 @@ const Login = () => {
           </h2>
           <p className="font-semibold ">Welcome to socia, a platform to connect with the social world</p>
         </div>
-        <from>
-          <div className="mb-5">
+        <from onSubmit={handleSubmit(formSubmit)}>
+        <div className="mb-5">
             <label htmlFor="email" className="block mb-2 font-semibold">Email</label>
-            <input type="text" name="email" placeholder="Enter your email"  className="w-full p-3 "/>
+            <input placeholder="Enter your email" {...register("email", {required: true})} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            {errors.exampleRequired && <span className="text-red-500">{errors.email.message}</span>}
           </div>
-          <div>
-            <label htmlFor="password" className="block mb-2 font-semibold">Password</label>
-            <input type="password" name="password" placeholder="Enter your password"  className="w-full p-3 "/>
+          <div className="mb-5">
+            <label htmlFor="name" className="block mb-2 font-semibold">Name</label>
+            <input placeholder="Enter your password"  {...register("password", {required: true})} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            {errors.exampleRequired && <span className="text-red-500">{errors.password.message}</span>}
           </div>
           
           <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Log in </button>

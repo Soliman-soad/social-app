@@ -7,14 +7,19 @@ import Navber from "../CommonItem/Navber";
 import CreatePost from "../Items/CreatePost";
 import Post from "../Items/Post";
 import Rightbar from "../Home/Rightbar";
+import Footer from "../CommonItem/Footer";
 
 const Profile = () => {
   return (
     <>
+    <div className="sticky top-0 w-full z-10">
     <Navber/>
+    </div>
     <div className="grid grid-cols-12 ">
       <div className="col-span-3">
+        <div className="sticky top-24">
         <Sidebar />
+        </div>
       </div>
       <div className="col-span-9">
         <div>
@@ -42,14 +47,20 @@ const Profile = () => {
                 <div className="col-span-3 px-5">
                     <CreatePost/>
                     <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
                 </div>
                 <div className="col-span-2 p-5 bg-white">
+                    <div className="sticky top-24">
                     <Rightbar/>
+                    </div>
                 </div>
             </div>
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

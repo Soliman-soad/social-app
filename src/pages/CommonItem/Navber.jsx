@@ -1,52 +1,160 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaEarlybirds } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { BiSearchAlt2 } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 
 export default function Navber() {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [notify, setNotify] =useState(false);
+	let activeStyle = {
+		color:"#FC6403",
+		fontWeight : "600"
+	  };
   return (
     <>
-    <header className="p-4 bg-gray-100 text-gray-800">
-	<div className="container flex justify-between items-center h-16 mx-auto">
-		
-        <div className='flex items-center basis-3/12 '>
+<div className='bg-white p-3'>
+      <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+        <div class="relative flex items-center justify-between">
+          <Link
+            to="/"
+            aria-label="Company"
+            title="Company"
+            class="inline-flex items-center"
+          >
             <h2 className='flex items-center text-4xl font-semibold text-orange-600'><FaEarlybirds/> socia</h2>
-        </div>
-		<div className='flex basis-6/12  w-full bg-white rounded-full p-2 h-10 items-center text-lg'>
+          </Link>
+		  <ul class="flex items-center hidden space-x-8 lg:flex">
+            <li>
+			<div className='flex basis-6/12  w-full bg-gray-50 rounded-full p-2 h-10 items-center text-lg'>
 			<BiSearchAlt2/>
-			<input type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full border-none outline-none'/>
+			<input type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full border-none outline-none bg-gray-50 w-[450px]'/>
 		</div>
-		<div className='flex justify-around basis-3/12'>
-        <ul className="items-stretch hidden space-x-3 lg:flex">
-			<li className="flex">
-				<Link to="" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-orange-600 border-orange-600">Home</Link>
+            </li>
+          </ul>
+          <ul class="flex items-center hidden space-x-8 lg:flex">
+		  <li className="flex">
+				<NavLink
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				to="/" className="flex items-center px-4 -mb-1 border-b-2 border-transparent"
+				end
+				>Home</NavLink>
 			</li>
 			<li className="flex">
-				<Link  to="" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Friends</Link>
+				<NavLink 
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				to="friend" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Friends</NavLink>
 			</li>
 			<li className="flex">
-				<Link  to="" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</Link>
+				<NavLink 
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				to="/profile" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</NavLink>
 			</li>
-		</ul>
-		<div className="items-center flex-shrink-0 hidden lg:flex justify-around ">
-			<div className='flex text-2xl items-center relative'>
-				<IoIosNotifications/>
+			<li className='items-center flex-shrink-0 hidden lg:flex justify-around '>
+			<div className='flex text-2xl items-center relative mr-2' >
+				<IoIosNotifications onClick={()=> setNotify(!notify)}/>
 				<span className='text-xs bg-orange-600 text-white rounded-full w-4 text-center h-4 absolute -top-1 -right-1'>1</span>
+				<div className={`inline w-64 absolute bg-orange-100 ease-in-out delay-150 -left-28 -bottom-20 p-5 ${notify ? "":"hidden"}`}>
+				<p className='text-base'>This is the first notification</p>
+				</div>
 			</div>
+			
 			<div>
 			<img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?size=626&ext=jpg&uid=R81466279&ga=GA1.2.31902201.1666701009&semt=ais" alt="" className='rounded-full object-cover w-12 h-12'/>
 			</div>
-		</div>
-		<button className="p-4 lg:hidden">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
-				<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-			</svg>
-		</button>
+			</li>
+          </ul>
+          
+          <div class="lg:hidden">
+            <button
+              aria-label="Open Menu"
+              title="Open Menu"
+              class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
+              onClick={() => setIsMenuOpen(true)}
+            >
+              <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
+                />
+              </svg>
+            </button>
+            {isMenuOpen && (
+              <div class="absolute top-0 left-0 w-full">
+                <div class="p-5 bg-white border rounded shadow-sm">
+                  <div class="flex items-center justify-between mb-4">
+                    <div>
+                      <Link
+                        to="/"
+                        aria-label="Company"
+                        title="Company"
+                        class="inline-flex items-center"
+                      >
+                        <h2 className='flex items-center text-4xl font-semibold text-orange-600'><FaEarlybirds/> socia</h2>
+                      </Link>
+                    </div>
+                    <div>
+                      <button
+                        aria-label="Close Menu"
+                        title="Close Menu"
+                        class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                          <path
+                            fill="currentColor"
+                            d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <nav>
+                    <ul class="space-y-4">
+					<li className="flex">
+				<NavLink
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				to="/" className="flex items-center px-4 -mb-1 border-b-2 border-transparent ">Home</NavLink>
+			</li>
+			<li className="flex">
+				<NavLink  to=""
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Friends</NavLink>
+			</li>
+			<li className="flex">
+				<NavLink 
+				style={({ isActive }) =>
+				isActive ? activeStyle : undefined
+			  }
+				to="/profile" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</NavLink>
+			</li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-	</div>
-</header>
-
+      </div>
+    </div>
 
     </>
   )
