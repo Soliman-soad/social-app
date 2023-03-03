@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useForm } from "react-hook-form";
+import { ProfileContext } from "../../context/UserContext";
 
 const Login = () => {
+  const {user, setUser} = useContext(ProfileContext)
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const formSubmit = data =>{
     console.log(data)
   }
+  console.log(user);
     const settings = {
         dots: true,
         infinite: true,
