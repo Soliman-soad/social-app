@@ -1,24 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaEarlybirds } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { useForm } from "react-hook-form";
 import { ProfileContext } from "../../context/UserContext";
+import axios from "axios";
 
 const Login = () => {
-  const {user, setUser} = useContext(ProfileContext)
+  const {user, setUser} = useContext(ProfileContext);
+  const[errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const formSubmit = data =>{
-    console.log(data)
+    
+  axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/login",{
+    "email":data.email,
+    "password":data.password,
+},
+{
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+)
+.then(data => {
+  localStorage.setItem("userId", JSON.stringify(data.data._id))
+  console.log(data.data._id)
+  console.log(localStorage.getItem("userId"));  
+  navigate("/")
+})
+.catch(err => {
+  console.log(err);
+  setErrorMessage("Email or password is wrong");
+})
+
   }
   console.log(user);
     const settings = {
         dots: true,
         infinite: true,
         autoplay: true,
-        speed: 2000,
+        speed: 1000,
         autoplaySpeed: 5000,
         slidesToShow: 1,
         slidesToScroll: 1
@@ -51,23 +75,23 @@ const Login = () => {
           </h2>
           <p className="font-semibold ">Welcome to socia, a platform to connect with the social world</p>
         </div>
-        <from onSubmit={handleSubmit(formSubmit)}>
+        <form onSubmit={handleSubmit(formSubmit)}>
         <div className="mb-5">
             <label htmlFor="email" className="block mb-2 font-semibold">Email</label>
-            <input placeholder="Enter your email" {...register("email", {required: true})} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            <input placeholder="Enter your email" {...register("email", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">{errors.email.message}</span>}
           </div>
           <div className="mb-5">
-            <label htmlFor="name" className="block mb-2 font-semibold">Name</label>
-            <input placeholder="Enter your password"  {...register("password", {required: true})} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            <label htmlFor="password" className="block mb-2 font-semibold">password</label>
+            <input placeholder="Enter your password" type="password"  {...register("password", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">{errors.password.message}</span>}
           </div>
-          
-          <button className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl">Log in </button>
+          {errorMessage ? <p className="text-red-500 text-sm">{errorMessage}</p>:<></>}
+          <input type="submit" className="btn bg-orange-600 rounded-sm  hover:bg-gray-900 ease-in-out duration-200 hover:border-orange-600 text-white w-full p-3 my-4 text-xl" defaultValue="Register"/>
           <p className="text-center font-medium">
-            Don't have account? <a href="#" className="text-orange-600">sign up</a>
+            Don't have account? <Link to="/register" className="text-orange-600">sign up</Link>
           </p>
-        </from>
+        </form>
       </div>
     </div>
   );
