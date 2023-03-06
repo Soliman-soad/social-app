@@ -1,13 +1,13 @@
 import React from 'react'
 import {AiOutlineComment, AiFillLike, AiOutlineShareAlt } from "react-icons/ai";
 
-export default function Post() {
+export default function Post({user}) {
   return (
     <div className=' rounded-xl p-4 my-5 bg-white'>
         <div className='flex my-8 '>
         <img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?size=626&ext=jpg&uid=R81466279&ga=GA1.2.31902201.1666701009&semt=ais" alt="" className='rounded-full object-cover w-12 h-12'/>
             <div className='ml-2'>
-                <h2 className='font-semibold'>MD Soliman Alam</h2>
+                <h2 className='font-semibold'>{user?.username}</h2>
                 <p>12 jan, 2023</p>
             </div>
         </div>

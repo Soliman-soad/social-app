@@ -4,13 +4,15 @@ import Login from './pages/Authentication/Login';
 import Register from './pages/Authentication/Register';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
+import EditProfile from './pages/Profile/EditProfile'
+import PrivateRoute from './privateRoute/PrivateRoute';
 
 function App() {
   const route = createBrowserRouter([
 
 {
   path:'/',
-  element:<Home/>
+  element:<PrivateRoute><Home/></PrivateRoute>
 },
 {
   path:'/login',
@@ -22,15 +24,17 @@ function App() {
 },
 {
   path:'/profile',
-  element:<Profile/>
+  element:<PrivateRoute><Profile/></PrivateRoute>
+},
+{
+  path:'/editProfile',
+  element:<PrivateRoute><EditProfile/></PrivateRoute>
 }
   ])
 
   return (
     <RouterProvider router={route}>
       <>
-
-      <Home/>
     </>
     </RouterProvider>
     

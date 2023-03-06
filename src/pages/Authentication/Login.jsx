@@ -6,38 +6,26 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useForm } from "react-hook-form";
 import { ProfileContext } from "../../context/UserContext";
-import axios from "axios";
 
 const Login = () => {
-  const {user, setUser} = useContext(ProfileContext);
+  const {logIn}=useContext(ProfileContext)
   const[errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const formSubmit = data =>{
-    
-  axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/login",{
-    "email":data.email,
-    "password":data.password,
-},
-{
-  headers: {
-    'Content-Type': 'application/json'
-  }
-}
-)
-.then(data => {
-  localStorage.setItem("userId", JSON.stringify(data.data._id))
-  console.log(data.data._id)
-  console.log(localStorage.getItem("userId"));  
-  navigate("/")
-})
-.catch(err => {
-  console.log(err);
-  setErrorMessage("Email or password is wrong");
-})
+    const email = data.email;
+    const password = data.password;
 
+    logIn(email,password)
+        .then(result => {
+            const user = result.user;
+            navigate("/");
+        })
+        .catch(error => {
+            console.error(error);
+            setErrorMessage("Email or password is wrong");
+        })
   }
-  console.log(user);
     const settings = {
         dots: true,
         infinite: true,

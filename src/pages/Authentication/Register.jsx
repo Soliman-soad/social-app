@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
@@ -9,13 +9,19 @@ import { useForm } from "react-hook-form";
 import { ProfileContext } from "../../context/UserContext";
 
 const Register = () => {
-
-  const {user,setUser} = useContext(ProfileContext)
+  const {registerUser,changeProfile}=useContext(ProfileContext)
   const[errorMessage, setErrorMessage] = useState(null)
   const navigate = useNavigate();
-  const [profilePicture, setProfilePicture] = useState('')
   const { register, handleSubmit, formState: { errors } } = useForm();  
+  const update = (name,img) =>{
+    changeProfile(name,img)
+    .then(()=>{})
+    .catch(error => console.log(error))
+}
   const formSubmit = data =>{
+    const email = data.email;
+  const password = data.password;
+  const name =data.name;
     const image = data.img[0];
     const formData = new FormData();
     formData.append("image",image);
@@ -24,15 +30,16 @@ const Register = () => {
         'Content-Type': 'multipart/form-data'
       }
   })
-  .then(data => setProfilePicture(data.data.data.url))
-  .catch(err => console.log(err))
-   
-  axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/register",{
-    "username": data.name,
-    "email":data.email,
-    "password":data.password,
-    "city": data.location,
-    "profilePicture": profilePicture
+  .then(data => {
+    // ------------------------------
+  if(data.data.data.url){
+    registerUser(email,password)
+  .then(result => {
+      const user = result.user;
+      update(name,data.data.data.url);
+      axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/register",{
+    "uId": user.uid,
+    "city": data.location
 },
 {
   headers: {
@@ -41,15 +48,24 @@ const Register = () => {
 }
 )
 .then(data => {
-  localStorage.setItem("userId", JSON.stringify(data.data._id))
-  console.log(data.data._id)
-  console.log(localStorage.getItem("userId"));  
-  navigate("/")
+  console.log(data);
+  navigate("/");
 })
 .catch(err => {
   console.log(err);
   setErrorMessage("Email has been already used");
-})
+})    
+  })
+  .catch(error => {
+      console.error(error);
+      setErrorMessage(error.message);
+  })
+  }
+  // ------------------------------
+  })
+  .catch(err => console.log(err))
+ 
+  
 
 }
   
