@@ -138,7 +138,7 @@ const Register = () => {
           </div>
           <div>
             <label htmlFor="img" className="block mb-2 font-semibold">Image </label>
-            <input type="file" {...register("img", {required: true})} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            <input type="file" {...register("img", {required: true})} accept="image/png, image/jpg, image/gif, image/jpeg" className="w-full p-3 bg-gray-100 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">This field is required</span>}
           </div>
                   
