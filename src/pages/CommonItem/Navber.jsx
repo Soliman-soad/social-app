@@ -1,14 +1,34 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaEarlybirds } from "react-icons/fa";
 import { Link, NavLink } from 'react-router-dom';
 import { BiSearchAlt2 } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { ProfileContext } from '../../context/UserContext';
+import axios from 'axios';
 
 export default function Navber() {
   const {user} = useContext(ProfileContext);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [notify, setNotify] =useState(false);
+  const [users, setUsers] = useState([]);
+  const[text, setText] = useState(false)
+  const[myUser, setMyUser] = useState(null);
+  useEffect(()=>{
+    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
+    .then(data => setUsers(data?.data))
+    .catch(err => console.log(err))
+
+  },[text])
+ console.log(users)
+  const search =(e) =>{
+    setMyUser(users.filter(i => (i.singleUserData.displayName).match(e.target.value) ))
+    if(e.target.value !==""){
+      setText(true)
+    }else{
+      setText(false)
+    }
+  }
+
 	let activeStyle = {
 		color:"#FC6403",
 		fontWeight : "600"
@@ -28,9 +48,25 @@ export default function Navber() {
           </Link>
 		  <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
-			<div className='flex basis-6/12  w-full bg-gray-50 rounded-full p-2 h-10 items-center text-lg'>
-			<BiSearchAlt2/>
-			<input type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full border-none outline-none bg-gray-50 w-[450px]'/>
+			<div className=' basis-6/12  w-full bg-gray-50 rounded-full p-2 h-10 items-center text-lg'>
+			<div className='flex   w-full bg-gray-50 rounded-full p-2 h-10 items-center text-lg'>
+      <BiSearchAlt2/>
+			<input onChange={search} type="text" placeholder='search friends' className='px-1 h-9 w-full rounded-full border-none outline-none bg-gray-50 w-[450px]'/>
+      </div>
+        {
+          text ?
+          <div className=' mt-1 w-full p-1 bg-slate-50'>
+            {
+          myUser.map((item, i)=>{
+            return(<div key={i}>
+              <p className='border w-full px-10 py-2'>{item?.singleUserData?.displayName}</p>
+            </div>)
+          })
+            }
+        </div>
+          :
+          <></>
+        }
 		</div>
             </li>
           </ul>

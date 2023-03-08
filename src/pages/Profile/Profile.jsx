@@ -62,12 +62,19 @@ const Profile = () => {
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><SlUserFollowing/></span> <span className="font-semibold mr-1">Following: </span> {(userData?.following)?.length} </p>
             </div>
             <div>
-            {user.uid === userData?.uId ? <span></span> : <button className='bg-orange-500 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-900'>Follow</button>}
+            {user?.uid === userData?.uId ? <span></span> : <button className='bg-orange-500 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-900'>Follow</button>}
             </div>
             </div>
             <div className="grid grid-cols-5 bg-gray-100 pt-8">
                 <div className="col-span-3 px-5">
+                  {
+                    user?.uid === userData?.uId
+                    ?
                     <CreatePost/>
+                    :
+                    <></>
+
+                  }
                     <Post user={user}/>
                     <Post/>
                     <Post/>
