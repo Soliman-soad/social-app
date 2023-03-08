@@ -37,7 +37,10 @@ const Register = () => {
   .then(result => {
       const user = result.user;
       update(name,data.data.data.url);
+      changeProfile(name,data.data.data.url)
+    .then(()=>{
       axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/register",{
+        singleUserData: user,
     "uId": user.uid,
     "city": data.location
 },
@@ -55,6 +58,9 @@ const Register = () => {
   console.log(err);
   setErrorMessage("Email has been already used");
 })    
+    })
+    .catch(error => console.log(error))
+      
   })
   .catch(error => {
       console.error(error);

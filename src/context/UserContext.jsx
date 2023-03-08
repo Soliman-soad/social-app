@@ -22,6 +22,8 @@ const UserContext = ({children}) => {
         setLoading(true)
         return signOut(auth);
     }
+
+
     // this user data 
     const [user ,setUser] = useState(null)
     useEffect(()=>{

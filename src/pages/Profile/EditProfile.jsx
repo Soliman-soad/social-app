@@ -6,7 +6,7 @@ import profileImg from "../../asset/profile.png"
 import { ProfileContext } from '../../context/UserContext';
 
 const Profile = () => {
-  const {user,changeProfile,passwordUpdate} = useContext(ProfileContext);
+  const {user,changeProfile} = useContext(ProfileContext);
     const [userData,setUserData] = useState(null);
   useEffect(()=>{
     if(user.uid){
@@ -27,16 +27,6 @@ const Profile = () => {
       .catch(error => console.log(error))
   }
 
-  // update password start
-   const newPassword = (password) =>{
-    passwordUpdate(password)
-    .then(()=>{
-      console.log("password updated")
-      navigate("/profile");
-  })
-    .catch(err=> console.log(err))
-   }
-  // update password end
 
     const formSubmit = data =>{
         if((data.img).length !== 0){
@@ -49,14 +39,44 @@ const Profile = () => {
           }
       })
       .then(dataItem => {
-        update(data.name ? data.name: user?.displayName, dataItem.data.data.url)
-        console.log("name update")
+        changeProfile(data.name ? data.name: user?.displayName,dataItem.data.data.url)
+      .then(()=>{
+        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
+        "singleUserData":user,
+        "uId": user.uid
+    }
+    )
+    .then(data => {
+      console.log(data)
+      navigate("/profile")
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+      })
+      .catch(error => console.log(error))
       })
       .catch(err => console.log(err))
         }
 
         if(data.name){
-          update(data.name, user.photoURL)
+          changeProfile(data.name ,user.photoURL)
+      .then(()=>{
+        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
+        "singleUserData":user,
+        "uId": user.uid
+    }
+    )
+    .then(data => {
+      console.log(data)
+      navigate("/profile")
+    })
+    .catch(err => {
+      console.log(err);
+    })
+      })
+      .catch(error => console.log(error))
         }
 
       if(data.location){
@@ -73,10 +93,6 @@ const Profile = () => {
       console.log(err);
     })
       }
-      if(data.password){
-        newPassword(data.password)
-      }
-    
     }
     
     return (

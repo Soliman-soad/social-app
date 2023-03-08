@@ -10,18 +10,18 @@ import Post from "../Items/Post";
 import Rightbar from "../Home/Rightbar";
 import Footer from "../CommonItem/Footer";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
 
 const Profile = () => {
+  const {id} = useParams(); 
   const {user} = useContext(ProfileContext);
   console.log(user)
   const [userData,setUserData] = useState(null);
   useEffect(()=>{
     if(user.uid){
-      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`)
+      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${id}`)
       .then(data => {
-        console.log(data.data)
         setUserData(data.data)
       })
       .catch(err =>{console.log(err)})
@@ -47,7 +47,7 @@ const Profile = () => {
           />
           <div>
             <img
-              src={user?.photoURL}
+              src={userData?.singleUserData?.photoURL}
               className=" rounded-full w-[230px] h-[230px] object-cover -mt-40 ml-20"
               alt=""
             />
@@ -55,7 +55,7 @@ const Profile = () => {
         </div>
         <div>
             <div className="ml-10 mt-5 pt-3 mb-5">
-            <h1 className="text-3xl font-semibold mb-3 flex items-center">{user?.displayName} <span className="ml-2 text-xl text-orange-400 bg-orange-100 p-1 rounded-full" title="Edit profile"><Link to="/editProfile"><BiEdit/></Link></span> </h1>
+            <h1 className="text-3xl font-semibold mb-3 flex items-center">{userData?.singleUserData?.displayName} {user.uid === userData?.uId ? <span className="ml-2 text-xl text-orange-400 bg-orange-100 p-1 rounded-full" title="Edit profile"><Link to="/editProfile"><BiEdit/></Link></span> : <span></span>} </h1>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><HiLocationMarker/></span> <span className="font-semibold mr-1">lives at</span> {userData?.city ===""? "Dhaka, Bangladesh": userData?.city}</p>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><FaUserFriends/></span> <span className="font-semibold mr-1">Friends: </span> {(userData?.friend)?.length} </p>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><SlUserFollowing/></span> <span className="font-semibold mr-1">Following: </span> {(userData?.following)?.length} </p>
