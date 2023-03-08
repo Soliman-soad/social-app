@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {AiOutlineComment, AiFillLike, AiOutlineShareAlt } from "react-icons/ai";
+import { ProfileContext } from '../../context/UserContext';
 
-export default function Post({user, item}) {
+export default function Post({ item, setLiking}) {
+    const {user} =useContext(ProfileContext);
     const [userData, setUserData] = useState(null);
+    
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${item.userId}`)
         .then(data => {
@@ -12,7 +15,18 @@ export default function Post({user, item}) {
         .catch(err =>{console.log(err)})
       
     },[])
-    console.log(userData)
+    
+        const liker =()=>{
+            axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/like`,
+            {
+                userId : user?.uid
+            }
+            )
+            .then(data => {
+                setLiking(data)
+            })
+            .catch(err => console.log(err))
+        }
   return (
     <div className=' rounded-xl p-4 my-5 bg-white'>
         <div className='flex my-8 '>
@@ -29,8 +43,8 @@ export default function Post({user, item}) {
         </p>
         <img src={item?.image} alt="" className='max-w-lg mx-auto my-5' />
         <div className='grid grid-cols-3 justify-center text-lg font-semibold'>
-            <div className='flex justify-center items-center bg-slate-100 p-1 rounded-full mx-2'>
-                <AiFillLike/> Like
+            <div onClick={liker} className={`flex justify-center items-center  p-1 rounded-full mx-2 ${(item?.likes).includes(user.uid) ? "bg-sky-400 text-white": "bg-slate-100"}`}>
+                <AiFillLike/> Like ({item?.likes.length})
             </div>
             <div className='flex justify-center items-center bg-slate-100 p-1 rounded-full mx-2'>
                 <AiOutlineComment/> Comment
