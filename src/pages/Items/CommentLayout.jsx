@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { ProfileContext } from '../../context/UserContext';
 
-const CommentLayout = ({data}) => {
+const CommentLayout = ({data, id, setPageLoad}) => {
     const [userData, setUserData] = useState(null);
-    
+    const{user} =useContext(ProfileContext)
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${data?.user}`)
         .then(data => {
@@ -14,8 +15,18 @@ const CommentLayout = ({data}) => {
         .catch(err =>{console.log(err)})
       
     },[])
+
+    const handleDeleteComment =()=>{
+        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${id}/deleteComment`,{
+            user: userData?.uid,
+            comment: data?.comment,
+            createdAt: data?.createdAt
+        })
+        .then(data=> setPageLoad(data))
+        .catch(err => console.log(err))
+    }
     return (
-        <div className="container flex flex-col w-11/12 p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
+        <div className="container flex flex-col w-11/12 p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800 md:my-10 my-8">
 	<div className="flex justify-between p-4">
 		<div className="flex space-x-4">
 			<div>
@@ -26,9 +37,13 @@ const CommentLayout = ({data}) => {
 				<span className="text-xs text-gray-600">{(data?.createdAt)?.slice(0,10)}</span>
 			</div>
 		</div>
-		<div className="flex items-center space-x-2 bg-red-500 text-white text-2xl font-bold rounded-full w-10 h-10" title='delete comment'>
-			<span className='mx-auto'><RiDeleteBin5Line/></span>
+		{
+            user?.uid === userData?.uid ? <div onClick={handleDeleteComment} className="flex items-center space-x-2 bg-red-500 text-white text-2xl font-bold rounded-full w-10 h-10 " title='delete comment'>
+			<span className='mx-auto hover:scale-125 duration-200'><RiDeleteBin5Line/></span>
 		</div>
+        :
+        <></>
+        }
 	</div>
 	<div className="p-4 space-y-2 text-sm text-gray-600">
 		<p>{data?.comment}</p>

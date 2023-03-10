@@ -10,6 +10,7 @@ const PostPage = () => {
     const {user} = useContext(ProfileContext)
     const [item, setItem] = useState(null);
     const {id} = useParams()
+    const [pageLoad, setPageLoad] =useState(null)
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/timelinePost/${id}`)
         .then(data =>{
@@ -17,7 +18,7 @@ const PostPage = () => {
             setItem(data.data)
         })
         .catch(err => console.log(err))
-    },[])
+    },[pageLoad])
     const handleForm =(e)=>{
         e.preventDefault();
         const text = e.target.text.value;
@@ -27,7 +28,10 @@ const PostPage = () => {
             comment: text,
             createdAt: item?.createdAt
         })
-        .then(data=> console.log(data))
+        .then(data=> {
+            setPageLoad(data)
+            e.target.text.value =""
+        })
         .catch(err => console.log(err))
         }
         
@@ -46,16 +50,21 @@ const PostPage = () => {
         </div>
         <div className="col-span-9">
             <Post item={item}/>
-            <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 ">
+            <div className="bg-gray-200 px-16 py-10">
+            <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 bg-white px-8 mb-5">
                 <img src={user.photoURL} alt="" className="w-14 h-14 rounded-full object-cover border-2 border-orange-500" />
-        <input type="text" name="text" placeholder="Write your comment" className="px-3 bg-slate-100 rounded-md w-full ml-2 border border-orange-500 py-2"/>
+        <input type="text" name="text" placeholder="Write your comment" className="px-3 bg-slate-200 rounded-md w-full ml-2 border mr-2 active:border-orange-500 py-2"/>
         <button type="submit" className="btn bg-orange-500 text-white rounded-md px-3 py-2  text-lg">Comment </button>
             </form>
+            <h3 className="text-xl font-semibold">
+                All comments:
+            </h3>
             {
                 item?.comments?.map((data,i)=>{
-                    return <CommentLayout data={data}/>
+                    return <CommentLayout data={data} id={id} setPageLoad={setPageLoad}/>
                 })
             }
+            </div>
         </div>
       </div>
       
