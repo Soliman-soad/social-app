@@ -44,18 +44,18 @@ export default function Post({ item, setLiking}) {
         </p>
         <img src={item?.image} alt="" className='max-w-lg mx-auto my-5' />
         <div className='grid grid-cols-3 justify-center text-lg font-semibold'>
-            <div onClick={liker} className={`flex justify-center items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-sky-400 text-white": "bg-slate-100"}`}>
-                <AiFillLike/> Like ({(item?.likes)?.length})
+            <div onClick={liker} className={`flex justify-center duration-150 items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-orange-500 text-white": "bg-slate-200"}`}>
+            <span className='hover:-rotate-45 hover:scale-125 duration-150'><AiFillLike/></span> Like ({(item?.likes)?.length})
             </div>
             <div >
                 <Link to={`/post/${item?._id}`}>
-                    <div className='flex justify-center items-center bg-slate-100 p-1 rounded-full mx-2 cursor-pointer'>
-                    <AiOutlineComment/> Comment ({(item?.comments)?.length})
+                    <div className='flex justify-center items-center bg-slate-200 p-1 rounded-full mx-2 cursor-pointer'>
+                    <span className='hover:-rotate-180 hover:scale-125 duration-150'><AiOutlineComment/></span> Comment ({(item?.comments)?.length})
                     </div>
                     </Link>
             </div>
-            <div className='flex justify-center items-center bg-slate-100 p-1 rounded-full mx-2 cursor-pointer'>
-                <AiOutlineShareAlt/> Share
+            <div className='flex justify-center items-center bg-slate-200 p-1 rounded-full mx-2 cursor-pointer'>
+                <span className='hover:rotate-90 hover:scale-125 duration-150'><AiOutlineShareAlt/></span> Share
             </div>
         </div>
     </div>

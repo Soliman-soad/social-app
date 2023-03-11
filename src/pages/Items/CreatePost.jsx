@@ -68,14 +68,14 @@ const imgData =(e)=>{
 setSelectedFile(e.target.files[0])
 }
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className="bg-white p-5 rounded-lg m-1">
-      <div className="flex ">
+    <form onSubmit={handleSubmit(formSubmit)} className="bg-white p-5 rounded-lg m-1 ">
+      <div className="flex justify-center">
         <img
           src={user?.photoURL}
           alt=""
           className="rounded-full object-cover w-12 h-12"
         />
-        <input  {...register("postText")} type="text" placeholder="What is your mind?" className="bg-gray-50 w-full boarder-none outline-none p-2 mx-5" />
+        <input  {...register("postText")} type="text" placeholder="What is your mind?" className="bg-slate-100 w-full boarder-none outline-none px-5 py-2 mx-3 rounded-full" />
       </div>
       <div>
         {
@@ -87,13 +87,17 @@ setSelectedFile(e.target.files[0])
         <div>
           <label htmlFor="img" className="flex items-center font-semibold p-3 m-2 justify-center bg-emerald-50 text-emerald-600 rounded-lg hover:text-white hover:bg-emerald-600">
             <input onInput={imgData}  {...register("img")} type="file" id="img" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden"/>
+                <span className=' hover:scale-150 duration-150'>
                 <IoMdPhotos/>
+                </span>
                 Image
           </label>
         </div>
         <div>
             <button type="submit" className="flex bg-blue-50 w-full justify-center items-center p-3 m-2 text-blue-600 font-semibold rounded-lg hover:text-white hover:bg-blue-500">
+                <span className='hover:rotate-45 hover:scale-125 duration-150'>
                 <BsFillFileEarmarkPostFill/>
+                </span>
                 Share
             </button>
         </div>

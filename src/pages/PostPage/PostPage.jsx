@@ -6,6 +6,8 @@ import Navber from "../CommonItem/Navber";
 import Sidebar from "../Home/Sidebar";
 import CommentLayout from "../Items/CommentLayout";
 import Post from "../Items/Post";
+import Footer from "../CommonItem/Footer"
+
 const PostPage = () => {
     const {user} = useContext(ProfileContext)
     const [item, setItem] = useState(null);
@@ -49,7 +51,7 @@ const PostPage = () => {
           </div>
         </div>
         <div className="col-span-9">
-            <Post item={item}/>
+            <Post item={item} setLiking={setPageLoad}/>
             <div className="bg-gray-200 px-16 py-10">
             <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 bg-white px-8 mb-5">
                 <img src={user.photoURL} alt="" className="w-14 h-14 rounded-full object-cover border-2 border-orange-500" />
@@ -67,7 +69,7 @@ const PostPage = () => {
             </div>
         </div>
       </div>
-      
+      <Footer/>
     </>
   );
 };

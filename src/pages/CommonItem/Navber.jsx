@@ -14,7 +14,7 @@ export default function Navber() {
   const[text, setText] = useState(false)
   const[myUser, setMyUser] = useState(null);
   useEffect(()=>{
-    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
+    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/allUser`)
     .then(data => setUsers(data?.data))
     .catch(err => console.log(err))
 
@@ -85,14 +85,14 @@ export default function Navber() {
 				style={({ isActive }) =>
 				isActive ? activeStyle : undefined
 			  }
-				to="friend" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Friends</NavLink>
+				to="/friends" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Friends</NavLink>
 			</li>
 			<li className="flex">
 				<NavLink 
 				style={({ isActive }) =>
 				isActive ? activeStyle : undefined
 			  }
-				to={`/profile/${user.uid}`} className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</NavLink>
+				to={`/profile/${user?.uid}`} className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</NavLink>
 			</li>
 			<li className='items-center flex-shrink-0 hidden lg:flex justify-around '>
 			<div className='flex text-2xl items-center relative mr-2' >
@@ -171,7 +171,7 @@ export default function Navber() {
 				to="/" className="flex items-center px-4 -mb-1 border-b-2 border-transparent ">Home</NavLink>
 			</li>
 			<li className="flex">
-				<NavLink  to=""
+				<NavLink  to="/friends"
 				style={({ isActive }) =>
 				isActive ? activeStyle : undefined
 			  }

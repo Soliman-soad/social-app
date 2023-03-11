@@ -7,6 +7,7 @@ export const ProfileContext =createContext()
 const auth =getAuth(app);
 const UserContext = ({children}) => {
     const [loading,setLoading] = useState(true)
+    
     // this is email and password signUp function
     const registerUser = (email,password) =>{
         setLoading(true)

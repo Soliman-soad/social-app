@@ -29,11 +29,11 @@ export default function Sidebar() {
 	</div>
 	<div className="divide-y divide-gray-300">
 		<ul className="pt-2 pb-4 space-y-1 text-sm">
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><CgFeed/></span> Feeds</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><FaUserFriends/></span> Friends</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><BiMessageRounded/> </span> Message</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><BsBookmarkHeartFill/> </span> Wishlist</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><BsInfoSquare/> </span>About</li>
+    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><CgFeed/></span> Feeds</li>
+    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><FaUserFriends/></span> Friends</li>
+    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BiMessageRounded/> </span> Message</li>
+    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsBookmarkHeartFill/> </span> Wishlist</li>
+    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsInfoSquare/> </span>About</li>
 		</ul>
 		<ul className="pt-4 pb-2 space-y-1 text-sm">
 			<li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white">
@@ -41,7 +41,7 @@ export default function Sidebar() {
 					<span>Settings</span>
 			</li>
 			<li onClick={userLogOut} className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white">
-      <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><BiLogOut/></span>
+      <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200 "><span><BiLogOut/></span></span>
 					<span>Logout</span>
 			</li>
 		</ul>
