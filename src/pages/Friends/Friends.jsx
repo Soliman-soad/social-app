@@ -52,16 +52,13 @@ const Friends = () => {
             <Sidebar />
           </div>
         </div>
-        <div className="col-span-9">
-          <div>
-            <h3 className="text-xl font-semibold">Friends</h3>
+        <div className="col-span-9 px-10 py-8">
+          <div className="border-b mb-5">
+            <h3 className="text-xl font-semibold">Friends:</h3>
             {users.map((item, i) => {
-              if (
-                
-                currentProfile?.friend?.includes(item?.singleUserData?.uid)
-              ) {
+              if (currentProfile?.friend?.includes(item?.singleUserData?.uid)){
                 return (
-                    <div key={i}>
+                    <div key={i} className="ml-5">
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-xl font-semibold flex items-center my-5">
@@ -92,8 +89,12 @@ const Friends = () => {
                       </div>
                     </div>
                   );
-              }
-              return <div key={i}></div>
+              }else if(!(currentProfile?.friend?.includes(item?.singleUserData?.uid))){
+            return <div key={i}></div>  
+            }
+              return <div key={i}>
+                <h1 className="text-center text-xl">No Following</h1>
+              </div>
             })}
           </div>
           <div>
@@ -104,7 +105,7 @@ const Friends = () => {
                 !(currentProfile?.friend?.includes(item?.singleUserData?.uid))
               ) {
                 return (
-                    <div key={i}>
+                    <div key={i} className="ml-5">
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-xl font-semibold flex items-center my-5">

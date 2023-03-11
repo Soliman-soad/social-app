@@ -8,13 +8,14 @@ import EditProfile from './pages/Profile/EditProfile'
 import PrivateRoute from './privateRoute/PrivateRoute';
 import PostPage from './pages/PostPage/PostPage';
 import Friends from './pages/Friends/Friends';
+import PageError from './pages/PageError/PageError';
 
 function App() {
   const route = createBrowserRouter([
-
 {
   path:'/',
-  element:<PrivateRoute><Home/></PrivateRoute>
+  element:<PrivateRoute><Home/></PrivateRoute>,
+  errorElement:<PageError/>
 },
 {
   path:'/login',
