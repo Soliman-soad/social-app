@@ -9,7 +9,7 @@ import { ProfileContext } from "../../context/UserContext";
 export default function Sidebar() {
 
 	const {logOut, user} = useContext(ProfileContext);
-	console.log(user);
+
 	const userLogOut = () =>{
 		logOut()
 		.then()

@@ -1,21 +1,25 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import {AiOutlineComment, AiFillLike, AiOutlineShareAlt } from "react-icons/ai";
+import { ImCross } from "react-icons/im";
 import { Link } from 'react-router-dom';
 import { ProfileContext } from '../../context/UserContext';
 
-export default function Post({ item, setLiking}) {
+export default function Post({ item, setLiking, profileUser}) {
     const {user} =useContext(ProfileContext);
     const [userData, setUserData] = useState(null);
-    
+    const[load, setLoad] = useState(false);
+
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${item?.userId}`)
         .then(data => {
+            console.log(data)
           setUserData(data.data)
+          
         })
         .catch(err =>{console.log(err)})
       
-    },[])
+    },[item])
     
         const liker =()=>{
             axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/like`,
@@ -28,14 +32,26 @@ export default function Post({ item, setLiking}) {
             })
             .catch(err => console.log(err))
         }
+        console.log(userData)
   return (
     <div className=' rounded-xl p-4 my-5 bg-white'>
-        <div className='flex my-8 '>
+        <div className='flex my-8 justify-between'>
+        <div className='flex'>
         <img src={userData?.singleUserData?.photoURL} alt="" className='rounded-full object-cover w-12 h-12'/>
             <div className='ml-2'>
                 <h2 className='font-semibold'>{userData?.singleUserData?.displayName}</h2>
                 <p>{(item?.createdAt)?.slice(0,10)}</p>
             </div>
+        </div>
+        {
+            userData?.singleUserData?.uid === user?.uid
+            ?
+            <div >
+            <span className='text-md text-red-600 flex items-center mr-5 -mt-4' title='Delete Post'><ImCross/></span>
+        </div>
+        :
+        <></>
+        }
         </div>
         <p>
             {

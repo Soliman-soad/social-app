@@ -19,7 +19,6 @@ export default function Navber() {
     .catch(err => console.log(err))
 
   },[text])
- console.log(users)
   const search =(e) =>{
     setMyUser(users.filter(i => (i.singleUserData.displayName).match(e.target.value) ))
     if(e.target.value !==""){

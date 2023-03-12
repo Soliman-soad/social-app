@@ -10,23 +10,49 @@ import Post from "../Items/Post";
 import Rightbar from "../Home/Rightbar";
 import Footer from "../CommonItem/Footer";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
+
 
 const Profile = () => {
   const {id} = useParams(); 
   const {user} = useContext(ProfileContext);
-  console.log(user)
+  const navigate = useNavigate()
   const [userData,setUserData] = useState(null);
+  const [postItem, setPostItem] = useState(null);
+
   useEffect(()=>{
     if(user.uid){
       axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${id}`)
       .then(data => {
-        setUserData(data.data)
+        
+        if(data.data){
+          setUserData(data.data)
+        }else if(data.data ===""){
+          navigate("/error")
+        }
       })
-      .catch(err =>{console.log(err)})
+      .catch(err =>{
+        navigate("/error")
+        console.log(err)
+      })
     }
   },[id])
+
+
+  useEffect(()=>{
+    if(user.uid){
+      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/profile/${id}`)
+      .then(data => {        
+        setPostItem(data.data)
+      })
+      .catch(err =>{
+        navigate("/error")
+        console.log(err)
+      })
+    }
+  },[id])
+
   return (
     <>
     <div className="sticky top-0 w-full z-10">
@@ -75,10 +101,15 @@ const Profile = () => {
                     <></>
 
                   }
-                    <Post user={user}/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
+                 {postItem?.length ===0
+                 ?
+                 <h2 className="text-2xl font-semibold text-center my-10">No post so far</h2>
+                 :
+                  postItem?.map((item,i)=>{
+                    return <Post key={i} item={item}/>
+                  })
+                  }
+                    
                 </div>
                 <div className="col-span-2 p-5 bg-white">
                     <div className="sticky top-24">

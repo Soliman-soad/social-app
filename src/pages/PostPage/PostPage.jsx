@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
 import Navber from "../CommonItem/Navber";
 import Sidebar from "../Home/Sidebar";
@@ -10,16 +10,23 @@ import Footer from "../CommonItem/Footer"
 
 const PostPage = () => {
     const {user} = useContext(ProfileContext)
-    const [item, setItem] = useState(null);
+    const [item, setItem] = useState([]);
     const {id} = useParams()
     const [pageLoad, setPageLoad] =useState(null)
+    const navigate = useNavigate()
+
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/timelinePost/${id}`)
         .then(data =>{
-            console.log(data)
-            setItem(data.data)
+            setItem(data?.data)             
+            if(data.data ===""){          
+              navigate("/error")
+            }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          navigate("/error")
+          console.log(err)
+        })
     },[pageLoad])
     const handleForm =(e)=>{
         e.preventDefault();
@@ -36,9 +43,8 @@ const PostPage = () => {
         })
         .catch(err => console.log(err))
         }
-        
-
     }
+    console.log(item)
   return (
     <>
       <div className="sticky top-0 w-full z-10">
@@ -51,7 +57,7 @@ const PostPage = () => {
           </div>
         </div>
         <div className="col-span-9">
-            <Post item={item} setLiking={setPageLoad}/>
+            <Post item={item} profileUser={item?.userId} setLiking={setPageLoad}/>
             <div className="bg-gray-200 px-16 py-10">
             <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 bg-white px-8 mb-5">
                 <img src={user.photoURL} alt="" className="w-14 h-14 rounded-full object-cover border-2 border-orange-500" />

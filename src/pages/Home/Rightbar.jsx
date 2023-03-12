@@ -29,14 +29,13 @@ export default function Rightbar() {
     .then(data=> console.log(data))
     .catch(err => console.log(err))
   }
-  console.log(users)
   return (
     <div >
       <h3 className='text-xl font-semibold'>Active Friend</h3>
       {
         users.map((item, i) => {
           if(item?.singleUserData?.uid === user.uid ){
-            return <></>
+            return <div key={i}></div>
           }
          return( <div key={i}>
             <div className='flex items-center justify-between'>
