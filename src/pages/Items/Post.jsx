@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import {AiOutlineComment, AiFillLike, AiOutlineShareAlt } from "react-icons/ai";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { SlOptions } from "react-icons/sl";
 import { ImCross } from "react-icons/im";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ProfileContext } from '../../context/UserContext';
 
-export default function Post({ item, setLiking, profileUser}) {
+export default function Post({ item, setLiking}) {
     const {user} =useContext(ProfileContext);
     const [userData, setUserData] = useState(null);
-    const[load, setLoad] = useState(false);
+    const [deleteShow, setDeleteShow] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${item?.userId}`)
@@ -20,6 +23,17 @@ export default function Post({ item, setLiking, profileUser}) {
         .catch(err =>{console.log(err)})
       
     },[item])
+    const deletePost = () =>{
+        axios.put(`http://localhost:5500/api/post/${item._id}/delete`,{
+            userId: user?.uid
+        })
+        .then(data => {
+            console.log(data)
+            setLiking(data)
+            navigate('/')            
+        })
+        .catch(err => console.log(err))
+    }
     
         const liker =()=>{
             axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/like`,
@@ -46,9 +60,18 @@ export default function Post({ item, setLiking, profileUser}) {
         {
             userData?.singleUserData?.uid === user?.uid
             ?
-            <div >
-            <span className='text-md text-red-600 flex items-center mr-5 -mt-4' title='Delete Post'><ImCross/></span>
-        </div>
+            <div className='flex'>
+            <div onClick={deletePost} className={` flex items-center  ${deleteShow? "" :'hidden'}  bg-red-500 text-white text-md font-bold rounded-lg  `} title='delete post'>
+			<span className='mx-auto hover:scale-125 duration-200 p-1'>Delete post</span>
+		</div>
+            <div onClick={()=>setDeleteShow(false)} className={`mr-10 flex items-center  ${deleteShow? "" :'hidden'} text-md rounded-lg w-10 h-10 `} title='delete post'>
+			<span className='mx-auto hover:scale-125 duration-200'><ImCross/></span>
+		</div>
+            <div onClick={()=>setDeleteShow(true)} className={`mr-10 flex items-center space-x-2 ${deleteShow?  'hidden' : ""} text-slate-900 text-md font-bold rounded-lg w-10 h-10 `} title='delete post'>
+			<span className='mx-auto hover:scale-125 duration-200 text-2xl'><SlOptions/></span>
+		</div>
+            </div>
+
         :
         <></>
         }
