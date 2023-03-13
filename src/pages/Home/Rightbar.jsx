@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { ProfileContext } from '../../context/UserContext';
 
-export default function Rightbar() {
+export default function Rightbar({load}) {
   const {user} = useContext(ProfileContext);
   const [users, setUsers] = useState([]);
   const [currentProfile, setCurrentProfile] = useState(null)
@@ -15,7 +15,7 @@ export default function Rightbar() {
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
     .then(data => setUsers(data?.data))
     .catch(err => console.log(err))
-  },[currentProfile])
+  },[currentProfile,load])
 
 
     useEffect(()=>{
@@ -25,7 +25,7 @@ export default function Rightbar() {
         })
         .catch(err =>{console.log(err)})
       
-    },[userData])
+    },[userData,load])
 
     useEffect(()=>{
       if(user.uid){
@@ -42,7 +42,7 @@ export default function Rightbar() {
           console.log(err)
         })
       }
-    },[])
+    },[load])
   const handleFollow = (Friend) =>{
     axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/follow`,{
       userId : Friend

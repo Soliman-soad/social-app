@@ -20,6 +20,16 @@ const Profile = () => {
   const navigate = useNavigate()
   const [userData,setUserData] = useState(null);
   const [postItem, setPostItem] = useState(null);
+  const [load,setLoad]= useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(()=>{
+    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
+    .then(data => setUsers(data?.data))
+    .catch(err => console.log(err))
+  },[])
+
+  
 
   useEffect(()=>{
     if(user.uid){
@@ -37,7 +47,7 @@ const Profile = () => {
         console.log(err)
       })
     }
-  },[id])
+  },[id, load])
 
 
   useEffect(()=>{
@@ -52,6 +62,28 @@ const Profile = () => {
       })
     }
   },[id])
+
+  const handleFollow = (Friend) =>{
+    axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/follow`,{
+      userId : Friend
+    })
+    .then(data=> {
+      setLoad(!load)
+    })
+    .catch(err => console.log(err))
+  }
+  const handleUnfollow = (Friend) =>{
+    axios.put(`http://localhost:5500/api/users/${user.uid}/unfollow`,{
+      userId : Friend
+    })
+    .then(data=> {
+      setLoad(!load)
+    })
+    .catch(err => console.log(err))
+  }
+  
+  const followersData = users.filter(item => userData.following.includes(item.uId))
+  
 
   return (
     <>
@@ -88,8 +120,8 @@ const Profile = () => {
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><SlUserFollowing/></span> <span className="font-semibold mr-1">Following: </span> {(userData?.following)?.length} </p>
             </div>
             <div>
-            {user?.uid === userData?.uId || (userData?.friend).includes(user?.uid)  ? <span></span> : <button className='bg-orange-500 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-900'>Follow</button>}
-            {user?.uid === userData?.uId || !(userData?.friend).includes(user?.uid)  ? <span></span> : <button className='bg-slate-900 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-800'>Unfollow</button>}
+            {user?.uid === userData?.uId || (userData?.following)?.includes(user?.uid)  ? <span></span> : <button onClick={()=>handleFollow(userData?.uId)} className='bg-orange-500 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-900'>Follow</button>}
+            {user?.uid !== userData?.uId ? !(userData?.following)?.includes(user?.uid)  ? <span></span> : <button onClick={()=>handleUnfollow(userData?.uId)} className='bg-slate-900 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-800'>Unfollow</button> : <></>}
             </div>
             </div>
             <div className="grid grid-cols-5 bg-gray-100 pt-8">
@@ -114,7 +146,31 @@ const Profile = () => {
                 </div>
                 <div className="col-span-2 p-5 bg-white">
                     <div className="sticky top-24">
-                    <Rightbar/>
+                    {
+                      userData?.uId !== user?.uid
+                      ?
+                    <>
+                    <h3 className='text-xl font-semibold'>Followers</h3>
+                    {
+                      followersData?.map((item,i)=>{
+                        return(
+                          <div key={i} className='flex items-center justify-between'>
+              <Link to={`/profile/${item?.singleUserData?.uid}`}>
+              <div className='text-xl font-semibold flex items-center my-5'>
+        <img src={item?.singleUserData?.photoURL} alt="" className='rounded-full object-cover w-12 h-12 mr-2'/>
+        {item?.singleUserData?.displayName}
+        </div>
+        </Link>
+        </div>
+                        )
+                      })
+                    }
+              
+                    </>                      
+                    :
+                    
+                    <Rightbar load={load}/>
+                    }
                     </div>
                 </div>
             </div>
