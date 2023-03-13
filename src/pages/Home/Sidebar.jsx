@@ -6,6 +6,7 @@ import { FcSettings } from "react-icons/fc";
 import profileImg from "../../asset/profile.png"
 import { useContext } from "react";
 import { ProfileContext } from "../../context/UserContext";
+import { Link } from "react-router-dom";
 export default function Sidebar() {
 
 	const {logOut, user} = useContext(ProfileContext);
@@ -29,17 +30,18 @@ export default function Sidebar() {
 	</div>
 	<div className="divide-y divide-gray-300">
 		<ul className="pt-2 pb-4 space-y-1 text-sm">
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><CgFeed/></span> Feeds</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><FaUserFriends/></span> Friends</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BiMessageRounded/> </span> Message</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsBookmarkHeartFill/> </span> Wishlist</li>
-    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsInfoSquare/> </span>About</li>
+<Link to="/">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><CgFeed/></span> Feeds</li></Link>
+<Link to="/friends">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><FaUserFriends/></span> Friends</li></Link>
+<Link to="/">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BiMessageRounded/> </span> Message</li></Link>
+<Link to="/about">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsInfoSquare/> </span>About</li></Link>
 		</ul>
 		<ul className="pt-4 pb-2 space-y-1 text-sm">
+			<Link to={`/profile/${user?.uid}`}>
 			<li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white">
-        <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg"><FcSettings/></span>
+        <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200 hover:rounded-full hover:animate-bounce"><FcSettings/></span>
 					<span>Settings</span>
 			</li>
+			</Link>
 			<li onClick={userLogOut} className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white">
       <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200 "><span><BiLogOut/></span></span>
 					<span>Logout</span>

@@ -105,14 +105,14 @@ const Friends = () => {
             })}
           </div>
           <div>
-            <h3 className="text-xl font-semibold">Suggest to follow </h3>
             {users.map((item, i) => {
               if (
                 !(item?.singleUserData?.uid === user?.uid) &&
                 !(currentProfile?.friend?.includes(item?.singleUserData?.uid))
-              ) {
-                return (
+                ) {
+                  return (
                     <div key={i} className="ml-5">
+                      <h3 className="text-xl font-semibold">Suggest to follow </h3>
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-xl font-semibold flex items-center my-5">

@@ -9,6 +9,7 @@ import PrivateRoute from './privateRoute/PrivateRoute';
 import PostPage from './pages/PostPage/PostPage';
 import Friends from './pages/Friends/Friends';
 import PageError from './pages/PageError/PageError';
+import About from './pages/about/About';
 
 function App() {
   const route = createBrowserRouter([
@@ -40,6 +41,10 @@ function App() {
 {
   path:'/friends',
   element:<PrivateRoute><Friends/></PrivateRoute>
+},
+{
+  path:"/about",
+  element:<PrivateRoute><About/></PrivateRoute>
 }
   ])
 

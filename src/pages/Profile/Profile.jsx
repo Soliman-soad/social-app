@@ -99,7 +99,7 @@ const Profile = () => {
       <div className="col-span-9">
         <div>
           <img
-            src="https://img.freepik.com/free-photo/beautiful-tree-middle-field-covered-with-grass-with-tree-line-background_181624-29267.jpg?size=626&ext=jpg&uid=R81466279&ga=GA1.1.31902201.1666701009&semt=scalerv1"
+            src="https://img.freepik.com/free-vector/orange-triangle-background-3d-design_23-2148397934.jpg?size=626&ext=jpg&ga=GA1.2.31902201.1666701009&semt=ais"
             alt=""
             className="w-full max-h-96"
           />
