@@ -54,8 +54,8 @@ const Friends = () => {
       <div className="sticky top-0 w-full z-10">
         <Navber />
       </div>
-      <div className="grid grid-cols-12">
-        <div className="col-span-3  ">
+      <div className="grid md:grid-cols-12">
+        <div className="md:col-span-3 hidden md:block ">
           <div className="sticky top-20 min-h-screen border-r-2  w-full bg-gray-50">
             <Sidebar />
           </div>
@@ -63,11 +63,11 @@ const Friends = () => {
         {
           loader
            ?
-           <div className="col-span-9 mx-auto">
+           <div className="col-span-9 mx-auto min-h-screen">
              <Spinner />             
            </div>
               :
-              <div className="col-span-9 px-10 py-8">
+              <div className="md:col-span-9 px-10 py-8 min-h-screen">
           <div className="border-b mb-5">
             <h3 className="text-xl font-semibold">Following:</h3>
             {

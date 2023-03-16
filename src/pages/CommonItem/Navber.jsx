@@ -7,12 +7,20 @@ import { ProfileContext } from '../../context/UserContext';
 import axios from 'axios';
 
 export default function Navber() {
-  const {user} = useContext(ProfileContext);
+  const {user, logOut} = useContext(ProfileContext);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [notify, setNotify] =useState(false);
   const [users, setUsers] = useState([]);
   const[text, setText] = useState(false)
   const[myUser, setMyUser] = useState(null);
+
+
+  const handleLogOut =()=>{
+    logOut()
+		.then()
+		.catch(err =>console.log(err))
+  }
+
   useEffect(()=>{
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/allUser`)
     .then(data => setUsers(data?.data))
@@ -183,6 +191,11 @@ export default function Navber() {
 			  }
 				to={`/profile/${user.uid}`} className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Profile</NavLink>
 			</li>
+      <li >
+        <button onClick={handleLogOut} className="btn w-full mt-5 bg-orange-500 text-white rounded-md py-3">
+          Log out
+        </button>
+      </li>
                     </ul>
                   </nav>
                 </div>

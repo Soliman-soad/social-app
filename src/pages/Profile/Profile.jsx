@@ -93,8 +93,8 @@ const Profile = () => {
     <div className="sticky top-0 w-full z-10">
     <Navber/>
     </div>
-    <div className="grid grid-cols-12 ">
-      <div className="col-span-3">
+    <div className="md:grid grid-cols-12 ">
+      <div className="md:col-span-3 hidden md:block">
         <div className="sticky top-20">
         <Sidebar/>
         </div>
@@ -102,7 +102,7 @@ const Profile = () => {
       {
         loader
         ?
-        <div className="col-span-9 mx-auto">
+        <div className="col-span-9 mx-auto min-h-screen">
              <Spinner />             
            </div>
         :
@@ -134,7 +134,7 @@ const Profile = () => {
             {user?.uid !== userData?.uId ? !(userData?.following)?.includes(user?.uid)  ? <span></span> : <button onClick={()=>handleUnfollow(userData?.uId)} className='bg-slate-900 text-lg text-white px-5 py-3 rounded-md btn hover:bg-slate-800'>Unfollow</button> : <></>}
             </div>
             </div>
-            <div className="grid grid-cols-5 bg-gray-100 pt-8">
+            <div className="lg:grid grid-cols-5 bg-gray-100 pt-8">
                 <div className="col-span-3 px-5">
                   {
                     user?.uid === userData?.uId
@@ -146,7 +146,7 @@ const Profile = () => {
                   }
                  {postItem?.length ===0
                  ?
-                 <h2 className="text-2xl font-semibold text-center my-10">No post so far</h2>
+                 <h2 className="text-2xl font-semibold text-center py-12">No post so far</h2>
                  :
                   postItem?.map((item,i)=>{
                     return <Post key={i} item={item}/>
@@ -154,7 +154,7 @@ const Profile = () => {
                   }
                     
                 </div>
-                <div className="col-span-2 p-5 bg-white">
+                <div className="hidden lg:block col-span-2 p-5 bg-white">
                     <div className="sticky top-24">
                     {
                       userData?.uId !== user?.uid

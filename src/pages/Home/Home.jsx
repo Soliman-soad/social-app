@@ -31,17 +31,17 @@ export default function Home() {
       <div className="sticky top-0 w-full z-10">
       <Navber />
       </div>
-      <div className="grid grid-cols-12 gap-5 bg-gray-200">
-        <div className="col-span-3  ">
+      <div className="grid md:grid-cols-12 gap-5 bg-gray-200">
+        <div className="md:col-span-3 hidden md:block ">
           <div className="sticky top-20 min-h-screen border-r-2  w-full bg-gray-50">
           <Sidebar />
           </div>
         </div>
-        <div className="col-span-6 ">
+        <div className="lg:col-span-6 md:col-span-9">
           <CreatePost/>
           <Newsfeed />
         </div>
-        <div className="col-span-3 bg-gray-50 text-gray-800" >
+        <div className="lg:col-span-3 hidden lg:block bg-gray-50 text-gray-800" >
           <div className="sticky top-24 min-h-screen  p-5">
           <Rightbar />
           </div>
