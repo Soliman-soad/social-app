@@ -45,7 +45,8 @@ function App() {
 {
   path:"/about",
   element:<PrivateRoute><About/></PrivateRoute>
-}
+},
+
   ])
 
   return (

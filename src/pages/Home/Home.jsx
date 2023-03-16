@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../context/UserContext";
 import Footer from "../CommonItem/Footer";
+import LoadingItem from "../CommonItem/LoadingItem";
 import Navber from "../CommonItem/Navber";
 import CreatePost from "../Items/CreatePost";
 import Newsfeed from "./Newsfeed";
@@ -11,15 +12,20 @@ import Sidebar from "./Sidebar";
 export default function Home() {
   const {user} = useContext(ProfileContext);
   const [userData,setUserData] = useState(null);
+  const [loader, setLoader] = useState(true)
   useEffect(()=>{
-    if(localStorage.getItem("userId")){
-      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${JSON.parse(localStorage.getItem("userId"))}`)
+    setLoader(true)
+    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}`)
       .then(data => {
         setUserData(data.data);
+        setLoader(false)
       })
       .catch(err =>{console.log(err)})
-    }
   },[])
+
+  if(loader){
+    return <LoadingItem/>
+  }
   return (
     <>
       <div className="sticky top-0 w-full z-10">

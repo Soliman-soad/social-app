@@ -83,7 +83,7 @@ setSelectedFile(e.target.files[0])
         }
         
       </div>
-      <div className="grid grid-cols-2 text-center gap-3">
+      <div className="grid grid-cols-2 text-center gap-5 pt-3 px-3">
         <div>
           <label htmlFor="img" className="flex items-center font-semibold p-3 m-2 justify-center bg-emerald-50 text-emerald-600 rounded-lg hover:text-white hover:bg-emerald-600">
             <input onInput={imgData}  {...register("img")} type="file" id="img" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden"/>

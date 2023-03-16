@@ -7,6 +7,7 @@ import Sidebar from "../Home/Sidebar";
 import CommentLayout from "../Items/CommentLayout";
 import Post from "../Items/Post";
 import Footer from "../CommonItem/Footer"
+import Spinner from "../Items/Spinner";
 
 const PostPage = () => {
     const {user} = useContext(ProfileContext)
@@ -14,11 +15,13 @@ const PostPage = () => {
     const {id} = useParams()
     const [pageLoad, setPageLoad] =useState(null)
     const navigate = useNavigate()
+    const [loader, setLoader] = useState(true)
 
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/timelinePost/${id}`)
         .then(data =>{
             setItem(data?.data)             
+            setLoader(false)
             if(data.data ===""){          
               navigate("/error")
             }
@@ -56,6 +59,13 @@ const PostPage = () => {
             <Sidebar />
           </div>
         </div>
+        {
+          loader
+          ?
+          <div className="col-span-9 mx-auto">
+             <Spinner />             
+           </div>
+          :
         <div className="col-span-9">
             <Post item={item} profileUser={item?.userId} setLiking={setPageLoad}/>
             <div className="bg-gray-200 px-16 py-10">
@@ -74,6 +84,7 @@ const PostPage = () => {
             }
             </div>
         </div>
+        }
       </div>
       <Footer/>
     </>

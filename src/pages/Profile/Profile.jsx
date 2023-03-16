@@ -12,6 +12,7 @@ import Footer from "../CommonItem/Footer";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
+import Spinner from "../Items/Spinner";
 
 
 const Profile = () => {
@@ -22,6 +23,7 @@ const Profile = () => {
   const [postItem, setPostItem] = useState(null);
   const [load,setLoad]= useState(false);
   const [users, setUsers] = useState([]);
+  const [loader, setLoader] = useState(true)
 
   useEffect(()=>{
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
@@ -55,6 +57,7 @@ const Profile = () => {
       axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/profile/${id}`)
       .then(data => {        
         setPostItem(data.data)
+        setLoader(false)
       })
       .catch(err =>{
         navigate("/error")
@@ -96,6 +99,13 @@ const Profile = () => {
         <Sidebar/>
         </div>
       </div>
+      {
+        loader
+        ?
+        <div className="col-span-9 mx-auto">
+             <Spinner />             
+           </div>
+        :
       <div className="col-span-9">
         <div>
           <img
@@ -176,6 +186,7 @@ const Profile = () => {
             </div>
         </div>
       </div>
+      }
     </div>
     <Footer/>
     </>

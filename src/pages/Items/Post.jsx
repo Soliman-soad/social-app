@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import {AiOutlineComment, AiFillLike, AiOutlineShareAlt } from "react-icons/ai";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { SlOptions } from "react-icons/sl";
 import { ImCross } from "react-icons/im";
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,7 +15,6 @@ export default function Post({ item, setLiking}) {
     useEffect(()=>{
         axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${item?.userId}`)
         .then(data => {
-            console.log(data)
           setUserData(data.data)
           
         })
@@ -28,7 +26,6 @@ export default function Post({ item, setLiking}) {
             userId: user?.uid
         })
         .then(data => {
-            console.log(data)
             setLiking(data)
             navigate('/')            
         })
@@ -46,7 +43,7 @@ export default function Post({ item, setLiking}) {
             })
             .catch(err => console.log(err))
         }
-        console.log(userData)
+        
   return (
     <div className=' rounded-xl p-4 my-5 bg-white'>
         <div className='flex my-8 justify-between'>

@@ -5,17 +5,23 @@ import { ProfileContext } from "../../context/UserContext";
 import Footer from "../CommonItem/Footer";
 import Navber from "../CommonItem/Navber";
 import Sidebar from "../Home/Sidebar";
+import Spinner from "../Items/Spinner";
+
 
 const Friends = () => {
   const { user } = useContext(ProfileContext);
   const [users, setUsers] = useState([]);
   const [currentProfile, setCurrentProfile] = useState(null);
-  console.log(user);
+  const [loader, setLoader] = useState(true)
+
   useEffect(() => {
     axios.get(
         `https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/allUser`
       )
-      .then((data) => setUsers(data?.data))
+      .then((data) => {
+        setUsers(data?.data)
+        setLoader(false)
+      })
       .catch((err) => console.log(err));
   }, [currentProfile]);
 
@@ -25,6 +31,7 @@ const Friends = () => {
       )
       .then((data) => {
         setCurrentProfile(data.data);
+        setLoader(false);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +47,8 @@ const Friends = () => {
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
-  console.log(users);
+  
+  
   return (
     <>
       <div className="sticky top-0 w-full z-10">
@@ -52,7 +60,14 @@ const Friends = () => {
             <Sidebar />
           </div>
         </div>
-        <div className="col-span-9 px-10 py-8">
+        {
+          loader
+           ?
+           <div className="col-span-9 mx-auto">
+             <Spinner />             
+           </div>
+              :
+              <div className="col-span-9 px-10 py-8">
           <div className="border-b mb-5">
             <h3 className="text-xl font-semibold">Following:</h3>
             {
@@ -149,6 +164,8 @@ const Friends = () => {
             })}
           </div>
         </div>
+
+        }
       </div>
       <Footer />
     </>
