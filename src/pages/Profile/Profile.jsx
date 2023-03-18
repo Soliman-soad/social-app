@@ -23,7 +23,7 @@ const Profile = () => {
   const [postItem, setPostItem] = useState(null);
   const [load,setLoad]= useState(false);
   const [users, setUsers] = useState([]);
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(true);
 
   useEffect(()=>{
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
@@ -49,7 +49,7 @@ const Profile = () => {
         console.log(err)
       })
     }
-  },[id, load])
+  },[id, load, user])
 
 
   useEffect(()=>{
@@ -64,7 +64,7 @@ const Profile = () => {
         console.log(err)
       })
     }
-  },[id])
+  },[id, user])
 
   const handleFollow = (Friend) =>{
     axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/follow`,{
@@ -124,7 +124,7 @@ const Profile = () => {
         <div>
             <div className="ml-10 mt-5 pt-3 mb-5 flex justify-between md:mr-16 mr-8">
             <div>
-            <h1 className="text-3xl font-semibold mb-3 flex items-center">{userData?.singleUserData?.displayName} {user.uid === userData?.uId ? <span className="ml-2 text-xl text-orange-400 bg-orange-100 p-1 rounded-full" title="Edit profile"><Link to="/editProfile"><BiEdit/></Link></span> : <span></span>} </h1>
+            <h1 className="text-3xl font-semibold mb-3 flex items-center">{userData?.singleUserData?.displayName} {user.uid === userData?.uId ? <span className="ml-2 text-xl text-orange-400 bg-orange-100 p-1 rounded-full" title="Edit profile"><Link to="/editProfile" ><BiEdit/></Link></span> : <span></span>} </h1>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><HiLocationMarker/></span> <span className="font-semibold mr-1">lives at</span> {userData?.city ===""? "Dhaka, Bangladesh": userData?.city}</p>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><FaUserFriends/></span> <span className="font-semibold mr-1">Friends: </span> {(userData?.friend)?.length} </p>
             <p className="flex items-center text-lg mb-2"> <span className="mr-1 text-orange-500"><SlUserFollowing/></span> <span className="font-semibold mr-1">Following: </span> {(userData?.following)?.length} </p>

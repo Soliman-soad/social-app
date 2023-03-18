@@ -50,12 +50,12 @@ const Rightbar = ({load,id}) => {
   
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-white h-screen overflow-scroll p-5 overflow-x-hidden">
         
         {
           loader
            ?
-           <div className="col-span-9 mx-auto min-h-screen">
+           <div className="col-span-9 mx-auto  ">
              <Spinner />             
            </div>
               :

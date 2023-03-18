@@ -22,7 +22,7 @@ const CreatePost = ({setPageLoader, pageLoader}) => {
       const image = data.img[0];
     const formData = new FormData();
     formData.append("image",image);
-    axios.post('https://api.imgbb.com/1/upload?key=89b36a1573d5114380d55398de49d11b', formData, {
+    axios.post(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbb}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

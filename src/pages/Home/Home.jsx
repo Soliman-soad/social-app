@@ -43,7 +43,7 @@ export default function Home() {
           <Newsfeed pageLoader={pageLoader}/>
         </div>
         <div className="lg:col-span-3 hidden lg:block bg-gray-50 text-gray-800" >
-          <div className="sticky top-24 min-h-screen  p-5">
+          <div className="sticky top-24 bg-white ">
           <Rightbar id={user?.uid}/>
           </div>
         </div>

@@ -27,6 +27,7 @@ const Login = () => {
         .catch(error => {
             console.error(error);
             setErrorMessage("Email or password is wrong");
+            setLoadPage(false);
         })
   }
     const settings = {

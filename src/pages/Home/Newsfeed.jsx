@@ -13,11 +13,13 @@ export default function Newsfeed({pageloader}) {
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/allTimeline/${user.uid}`)
     .then(data=>{
       setPostData(data.data);
-      setLoader(false)
+      setLoader(false);
+      
     })
     .catch(err => console.log(err))
   },[liking, pageloader])
 
+    
   if(loader){
     return (
       <>
@@ -29,7 +31,7 @@ export default function Newsfeed({pageloader}) {
   return (
     <div >
       {
-        postData.reverse().map((item, i)=>{
+        postData.map((item, i)=>{
          return <Post key={i} item={item} setLiking={setLiking}/>
           
         })
