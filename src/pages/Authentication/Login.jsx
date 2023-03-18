@@ -6,20 +6,23 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useForm } from "react-hook-form";
 import { ProfileContext } from "../../context/UserContext";
+import Spinner from "../Items/Spinner";
 
 const Login = () => {
   const {logIn}=useContext(ProfileContext)
   const[errorMessage, setErrorMessage] = useState(null);
+  const [loadPage, setLoadPage] = useState(false)
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const formSubmit = data =>{
     const email = data.email;
     const password = data.password;
-
+    setLoadPage(true);
     logIn(email,password)
         .then(result => {
             const user = result.user;
             navigate("/");
+            setLoadPage(false);
         })
         .catch(error => {
             console.error(error);
@@ -35,6 +38,11 @@ const Login = () => {
         slidesToShow: 1,
         slidesToScroll: 1
       };
+
+      if(loadPage){
+        return <Spinner/>
+      }
+
   return (
     <div className="flex min-h-screen items-center max-w-screen-2xl mx-auto">
       <div className="max-w-[600px] bg-orange-600 text-white p-10 h-screen ">

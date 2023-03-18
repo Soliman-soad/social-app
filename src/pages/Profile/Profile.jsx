@@ -179,7 +179,7 @@ const Profile = () => {
                     </>                      
                     :
                     
-                    <Rightbar load={load}/>
+                    <Rightbar load={load} id={id}/>
                     }
                     </div>
                 </div>

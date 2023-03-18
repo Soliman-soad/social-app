@@ -4,7 +4,7 @@ import { ProfileContext } from '../../context/UserContext';
 import Post from '../Items/Post'
 import Spinner from '../Items/Spinner';
 
-export default function Newsfeed() {
+export default function Newsfeed({pageloader}) {
   const {user} =useContext(ProfileContext);
   const [postData, setPostData] = useState([]);
   const [liking, setLiking] = useState(null);
@@ -16,7 +16,7 @@ export default function Newsfeed() {
       setLoader(false)
     })
     .catch(err => console.log(err))
-  },[liking])
+  },[liking, pageloader])
 
   if(loader){
     return (
@@ -29,7 +29,7 @@ export default function Newsfeed() {
   return (
     <div >
       {
-        postData.map((item, i)=>{
+        postData.reverse().map((item, i)=>{
          return <Post key={i} item={item} setLiking={setLiking}/>
           
         })

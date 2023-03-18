@@ -12,7 +12,8 @@ import Sidebar from "./Sidebar";
 export default function Home() {
   const {user} = useContext(ProfileContext);
   const [userData,setUserData] = useState(null);
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(true);
+  const [pageLoader, setPageLoader] =useState(false);
   useEffect(()=>{
     setLoader(true)
     axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}`)
@@ -21,7 +22,7 @@ export default function Home() {
         setLoader(false)
       })
       .catch(err =>{console.log(err)})
-  },[])
+  },[pageLoader])
 
   if(loader){
     return <LoadingItem/>
@@ -38,12 +39,12 @@ export default function Home() {
           </div>
         </div>
         <div className="lg:col-span-6 md:col-span-9">
-          <CreatePost/>
-          <Newsfeed />
+          <CreatePost setPageLoader={setPageLoader} pageLoader={pageLoader}/>
+          <Newsfeed pageLoader={pageLoader}/>
         </div>
         <div className="lg:col-span-3 hidden lg:block bg-gray-50 text-gray-800" >
           <div className="sticky top-24 min-h-screen  p-5">
-          <Rightbar />
+          <Rightbar id={user?.uid}/>
           </div>
         </div>
       </div>

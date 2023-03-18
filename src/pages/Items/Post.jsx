@@ -22,12 +22,14 @@ export default function Post({ item, setLiking}) {
       
     },[item])
     const deletePost = () =>{
-        axios.put(`http://localhost:5500/api/post/${item._id}/delete`,{
+        
+        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/delete`,{
             userId: user?.uid
         })
         .then(data => {
-            setLiking(data)
-            navigate('/')            
+            setLiking(data);
+            navigate('/');  
+            setDeleteShow(false);
         })
         .catch(err => console.log(err))
     }
@@ -59,13 +61,13 @@ export default function Post({ item, setLiking}) {
             ?
             <div className='flex'>
             <div onClick={deletePost} className={` flex items-center  ${deleteShow? "" :'hidden'}  bg-red-500 text-white text-md font-bold rounded-lg  `} title='delete post'>
-			<span className='mx-auto hover:scale-125 duration-200 p-1'>Delete post</span>
+			<span className='mx-auto hover:scale-75 cursor-pointer duration-200 p-1'>Delete post</span>
 		</div>
             <div onClick={()=>setDeleteShow(false)} className={`mr-10 flex items-center  ${deleteShow? "" :'hidden'} text-md rounded-lg w-10 h-10 `} title='delete post'>
-			<span className='mx-auto hover:scale-125 duration-200'><ImCross/></span>
+			<span className='mx-auto hover:scale-125 cursor-pointer duration-200'><ImCross/></span>
 		</div>
             <div onClick={()=>setDeleteShow(true)} className={`mr-10 flex items-center space-x-2 ${deleteShow?  'hidden' : ""} text-slate-900 text-md font-bold rounded-lg w-10 h-10 `} title='delete post'>
-			<span className='mx-auto hover:scale-125 duration-200 text-2xl'><SlOptions/></span>
+			<span className='mx-auto hover:scale-125 cursor-pointer duration-200 text-2xl'><SlOptions/></span>
 		</div>
             </div>
 
@@ -79,8 +81,8 @@ export default function Post({ item, setLiking}) {
             }
         </p>
         <img src={item?.image} alt="" className='max-w-lg mx-auto my-5' />
-        <div className='grid grid-cols-3 justify-center text-lg font-semibold'>
-            <div onClick={liker} className={`flex justify-center duration-150 items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-orange-500 text-white": "bg-slate-200"}`}>
+        <div className='grid grid-cols-2 justify-center text-lg font-semibold'>
+            <div onClick={liker} className={`flex justify-center  duration-150 items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-orange-500 text-white": "bg-slate-200"}`}>
             <span className='hover:-rotate-45 hover:scale-125 duration-150'><AiFillLike/></span> Like ({(item?.likes)?.length})
             </div>
             <div >
@@ -89,9 +91,6 @@ export default function Post({ item, setLiking}) {
                     <span className='hover:-rotate-180 hover:scale-125 duration-150'><AiOutlineComment/></span> Comment ({(item?.comments)?.length})
                     </div>
                     </Link>
-            </div>
-            <div className='flex justify-center items-center bg-slate-200 p-1 rounded-full mx-2 cursor-pointer'>
-                <span className='hover:rotate-90 hover:scale-125 duration-150'><AiOutlineShareAlt/></span> Share
             </div>
         </div>
     </div>

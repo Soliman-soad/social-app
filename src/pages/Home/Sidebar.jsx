@@ -32,7 +32,7 @@ export default function Sidebar() {
 		<ul className="pt-2 pb-4 space-y-1 text-sm">
 <Link to="/">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><CgFeed/></span> Feeds</li></Link>
 <Link to="/friends">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><FaUserFriends/></span> Friends</li></Link>
-<Link to="/">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BiMessageRounded/> </span> Message</li></Link>
+<Link to="/message">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BiMessageRounded/> </span> Message</li></Link>
 <Link to="/about">    <li className="flex text-md items-center mt-3 cursor-pointer p-3 hover:bg-orange-600 hover:text-white"> <span className="mr-2 bg-orange-100 p-2 text-orange-500 font-bold rounded-lg hover:scale-150 duration-200"><BsInfoSquare/> </span>About</li></Link>
 		</ul>
 		<ul className="pt-4 pb-2 space-y-1 text-sm">

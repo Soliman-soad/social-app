@@ -5,14 +5,18 @@ import { ProfileContext } from "../../context/UserContext";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const CreatePost = () => {
+import Spinner from "./Spinner";
+const CreatePost = ({setPageLoader, pageLoader}) => {
   const {user} = useContext(ProfileContext);
   const [selectedFile, setSelectedFile] = useState();
   const [img, setImg] = useState();
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(false);
+  const [loadPage, setLoadPage] = useState(false)
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const formSubmit = data =>{
+    setLoadPage(true);
+    
     const postText = data.postText;
     if(data.img){
       const image = data.img[0];
@@ -32,7 +36,13 @@ const CreatePost = () => {
       image: data.data.data.url,
       desc: postText ? postText : ''
     })
-    .then(data=>navigate('/'))
+    .then(data=>{
+      navigate('/')
+      setLoadPage(false)
+      setPageLoader(!pageLoader)
+      setSelectedFile(undefined)
+      
+  })
     .catch(err => console.log(err))
   }
   // ------------------------------
@@ -45,9 +55,16 @@ const CreatePost = () => {
       image: "",
       desc: postText ? postText : ''
     })
-    .then(data=>navigate('/'))
+    .then(data=>{
+      navigate('/')
+    setLoadPage(false)
+    setPageLoader(!pageLoader)
+    setSelectedFile(undefined)
+  })
     .catch(err => console.log(err))
     }
+
+    data.postText.value =""
     setLoad(!load)
 }
 useEffect(()=>{
@@ -59,13 +76,20 @@ const objectUrl = URL.createObjectURL(selectedFile)
 setImg(objectUrl)
 console.log(objectUrl)
    return () => URL.revokeObjectURL(objectUrl)
-},[selectedFile], load)
+},[selectedFile])
 const imgData =(e)=>{
   if (!e.target.files || e.target.files.length === 0) {
     setSelectedFile(undefined)
     return
 }
 setSelectedFile(e.target.files[0])
+}
+
+
+
+
+if(loadPage){
+  return <Spinner/>
 }
   return (
     <form onSubmit={handleSubmit(formSubmit)} className="bg-white p-5 rounded-lg m-1 ">

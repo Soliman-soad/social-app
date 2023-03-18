@@ -66,7 +66,9 @@ export default function Navber() {
             {
           myUser.map((item, i)=>{
             return(<div key={i}>
-              <p className='border w-full px-10 py-2'>{item?.singleUserData?.displayName}</p>
+              <Link to={`/profile/${item?.singleUserData?.uid}`}>
+              <p className='border w-full px-10 py-2 cursor-pointer'>{item?.singleUserData?.displayName}</p>
+              </Link>
             </div>)
           })
             }
@@ -106,7 +108,7 @@ export default function Navber() {
 				<IoIosNotifications onClick={()=> setNotify(!notify)}/>
 				<span className='text-xs bg-orange-600 text-white rounded-full w-4 text-center h-4 absolute -top-1 -right-1'>1</span>
 				<div className={`inline w-64 absolute bg-orange-100 ease-in-out delay-150 -left-28 -bottom-20 p-5 ${notify ? "":"hidden"}`}>
-				<p className='text-base'>This is the first notification</p>
+				<p className='text-base'>Welcome to socia</p>
 				</div>
 			</div>
 			

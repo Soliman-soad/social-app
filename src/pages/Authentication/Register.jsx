@@ -7,10 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { ProfileContext } from "../../context/UserContext";
+import Spinner from "../Items/Spinner";
 
 const Register = () => {
   const {registerUser,changeProfile}=useContext(ProfileContext)
   const[errorMessage, setErrorMessage] = useState(null)
+  const [loadPage, setLoadPage] = useState(false);
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();  
   const update = (name,img) =>{
@@ -19,6 +21,7 @@ const Register = () => {
     .catch(error => console.log(error))
 }
   const formSubmit = data =>{
+    setLoadPage(true)
     const email = data.email;
   const password = data.password;
   const name =data.name;
@@ -53,9 +56,11 @@ const Register = () => {
 .then(data => {
   console.log(data);
   navigate("/");
+  setLoadPage(false)
 })
 .catch(err => {
   console.log(err);
+  setLoadPage(false)
   setErrorMessage("Email has been already used");
 })    
     })
@@ -84,6 +89,11 @@ const Register = () => {
         slidesToShow: 1,
         slidesToScroll: 1
       };
+
+      if(loadPage){
+        return <Spinner/>
+      }
+
   return (
     <div className="grid grid-cols-2 min-h-screen h-full items-center max-w-screen-2xl mx-auto bg-orange-600">
       <div className="max-w-[600px] bg-orange-600 text-white p-10 my-auto hidden md:block mx-auto">

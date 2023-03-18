@@ -2,12 +2,19 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import profileImg from "../../asset/profile.png"
+import profileImg from "../../asset/profile.png";
+import { BiEdit } from "react-icons/bi";
 import { ProfileContext } from '../../context/UserContext';
+import Spinner from '../Items/Spinner';
 
 const Profile = () => {
   const {user,changeProfile} = useContext(ProfileContext);
-    const [userData,setUserData] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
+  const [img, setImg] = useState(undefined);
+  const [userData,setUserData] = useState(null);
+  const [loadPage,setLoadPage] = useState(false);
+
+
   useEffect(()=>{
     if(user.uid){
       axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`)
@@ -21,15 +28,11 @@ const Profile = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();  
     const navigate = useNavigate();
 
-    const update = (name,img) =>{
-      changeProfile(name,img)
-      .then(()=>{navigate("/profile")})
-      .catch(error => console.log(error))
-  }
 
 
     const formSubmit = data =>{
         if((data.img).length !== 0){
+          setLoadPage(true)
         const image = data.img[0];
         const formData = new FormData();
         formData.append("image",image);
@@ -48,7 +51,8 @@ const Profile = () => {
     )
     .then(data => {
       console.log(data)
-      navigate("/profile")
+      navigate(`/profile/${user?.uid}`)
+      setLoadPage(false)
     })
     .catch(err => {
       console.log(err);
@@ -61,6 +65,7 @@ const Profile = () => {
         }
 
         if(data.name){
+          setLoadPage(true)
           changeProfile(data.name ,user.photoURL)
       .then(()=>{
         axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
@@ -70,7 +75,8 @@ const Profile = () => {
     )
     .then(data => {
       console.log(data)
-      navigate("/profile")
+      navigate(`/profile/${user?.uid}`)
+      setLoadPage(false)
     })
     .catch(err => {
       console.log(err);
@@ -80,6 +86,7 @@ const Profile = () => {
         }
 
       if(data.location){
+        setLoadPage(true)
         axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
         "city": data?.location ? data.location: user?.city,
         "uId": user.uid
@@ -87,19 +94,50 @@ const Profile = () => {
     )
     .then(data => {
       console.log(data)
-      navigate("/profile")
+      navigate(`/profile/${user?.uid}`)
+      setLoadPage(false)
     })
     .catch(err => {
       console.log(err);
     })
       }
     }
+
+    useEffect(()=>{
+      if (!selectedFile) {
+        setImg(undefined)
+        return
+    }
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setImg(objectUrl)
+    console.log(objectUrl)
+       return () => URL.revokeObjectURL(objectUrl)
+    },[selectedFile])
+
+    const imgData =(e)=>{
+      if (!e.target.files || e.target.files.length === 0) {
+        setSelectedFile(undefined)
+        return
+    }
+    setSelectedFile(e.target.files[0])
+    }
+    
+    if(loadPage){
+      return <Spinner/>
+    }
     
     return (
         <div>
+          <h2 className='text-3xl my-5 ml-5 flex mt-10'> <span className='text-orange-500 bg-orange-100 rounded-full p-2'><BiEdit/></span> Edit Profile:</h2>
             <div className="w-full h-screen p-8 flex flex-col md:flex-row  sm:space-x-6 ">
 	<div className="w-5/12 max-h-screen">
-		<img src={user?.profilePicture==="" ? profileImg :user?.photoURL } alt="" className="object-fit p-5 w-full h-full rounded dark:bg-gray-500" />
+    {
+      img
+      ?
+      <img src={img} alt="" className="object-cover p-5 w-full h-full rounded " />
+      :
+		<img src={user?.profilePicture==="" ? profileImg :user?.photoURL } alt="" className="object-cover p-5 w-full h-full rounded" />
+    }
 	</div>
 	<div className="flex flex-col space-y-4">
 		<div>
@@ -127,7 +165,7 @@ const Profile = () => {
           </div>
           <div>
             <label htmlFor="img" className="block mb-2 font-semibold">Image </label>
-            <input type="file" {...register("img")} className="w-full p-3 bg-gray-100 rounded-sm"/>
+            <input onInput={imgData} type="file" {...register("img")} className="w-full p-3 bg-gray-100 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">This field is required</span>}
           </div>
                   
