@@ -50,7 +50,7 @@ const Rightbar = ({load,id}) => {
   
   return (
     <>
-      <div className="bg-white h-screen overflow-scroll p-5 overflow-x-hidden">
+      <div className="bg-white h-screen overflow-scroll p-5 overflow-x-hidden scroll-">
         
         {
           loader
@@ -61,7 +61,7 @@ const Rightbar = ({load,id}) => {
               :
               <div className="min-h-screen">
           <div className="border-b mb-5">
-            <h3 className="text-xl font-semibold">Following:</h3>
+            <h3 className="text-lg font-semibold mb-3">Following:</h3>
             {
               (currentProfile?.friend)?.length === 0
               ?
@@ -73,7 +73,7 @@ const Rightbar = ({load,id}) => {
               if (currentProfile?.friend?.includes(item?.singleUserData?.uid)){
                 return (
                     <div key={i} >
-                      <div className="flex items-center justify-between hover:bg-orange-500 hover:text-white hover:px-2 duration-100">
+                      <div className="flex items-center justify-between hover:bg-orange-500 hover:text-white hover:px-2 duration-100 my-2">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-md font-semibold flex items-center my-5 ">
                             <img
@@ -121,7 +121,7 @@ const Rightbar = ({load,id}) => {
             user?.uid === id
             ?
             <div>
-          <h3 className="text-xl font-semibold">Suggest to follow </h3>
+          <h3 className="text-lg font-semibold mb-3">Suggest to follow </h3>
             {users.map((item, i) => {
               if (
                 !(item?.singleUserData?.uid === user?.uid) &&

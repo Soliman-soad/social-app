@@ -46,7 +46,7 @@ const Login = () => {
 
   return (
     <div className="flex min-h-screen items-center max-w-screen-2xl mx-auto">
-      <div className="max-w-[600px] bg-orange-600 text-white p-10 h-screen ">
+      <div className="max-w-[600px] bg-orange-600 text-white p-10 h-screen hidden lg:block">
       <Slider {...settings}>
           <div className="text-center mt-20">
             <img src="https://img.freepik.com/free-photo/silhouette-group-people-have-fun-top-mountain-near-tent-during-sunset_146671-18472.jpg?size=626&ext=jpg&uid=R81466279&ga=GA1.1.31902201.1666701009&semt=sph" alt="" className="w-96 mx-auto"/>

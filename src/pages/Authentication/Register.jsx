@@ -95,8 +95,8 @@ const Register = () => {
       }
 
   return (
-    <div className="grid grid-cols-2 min-h-screen h-full items-center max-w-screen-2xl mx-auto bg-orange-600">
-      <div className="max-w-[600px] bg-orange-600 text-white p-10 my-auto hidden md:block mx-auto">
+    <div className="lg:grid grid-cols-2 min-h-screen h-full items-center max-w-screen-2xl mx-auto bg-orange-600 mx-auto">
+      <div className="max-w-[600px] bg-orange-600 text-white p-10 my-auto hidden md:block mx-auto hidden lg:block">
       <Slider {...settings}>
           <div className="text-center mt-16">
             <img src="https://img.freepik.com/free-photo/silhouette-group-people-have-fun-top-mountain-near-tent-during-sunset_146671-18472.jpg?size=626&ext=jpg&uid=R81466279&ga=GA1.1.31902201.1666701009&semt=sph" alt="" className="w-11/12 mx-auto rounded-lg"/>

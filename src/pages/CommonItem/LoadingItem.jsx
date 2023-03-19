@@ -3,7 +3,7 @@ import { FaEarlybirds } from 'react-icons/fa';
 
 const LoadingItem = () => {
     return (
-        <div className='min-h-screen animate-pulse flex items-center justify-center text-8xl text-orange-500'>
+        <div className='min-h-screen animate-pulse flex items-center justify-center text-6xl text-orange-500'>
             <FaEarlybirds/>
         </div>
     );

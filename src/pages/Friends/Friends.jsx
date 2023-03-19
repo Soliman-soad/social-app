@@ -83,7 +83,7 @@ const Friends = () => {
                     <div key={i} className="ml-5">
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
-                          <div className="text-xl font-semibold flex items-center my-5">
+                          <div className="text-md font-semibold flex items-center my-5">
                             <img
                               src={item?.singleUserData?.photoURL}
                               alt=""
@@ -120,6 +120,7 @@ const Friends = () => {
             })}
           </div>
           <div>
+          <h3 className="text-xl font-semibold">Suggest to follow </h3>
             {users.map((item, i) => {
               if (
                 !(item?.singleUserData?.uid === user?.uid) &&
@@ -127,10 +128,10 @@ const Friends = () => {
                 ) {
                   return (
                     <div key={i} className="ml-5">
-                      <h3 className="text-xl font-semibold">Suggest to follow </h3>
+                      
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
-                          <div className="text-xl font-semibold flex items-center my-5">
+                          <div className="text-md font-semibold flex items-center my-5">
                             <img
                               src={item?.singleUserData?.photoURL}
                               alt=""
