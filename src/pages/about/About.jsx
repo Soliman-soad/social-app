@@ -3,6 +3,7 @@ import Footer from '../CommonItem/Footer';
 import Navber from '../CommonItem/Navber';
 import Developer from '../../asset/my.jpg';
 import { BsLinkedin, BsFacebook } from "react-icons/bs";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const About = () => {
     return (
         <>
@@ -11,7 +12,7 @@ const About = () => {
         <div className='w-full h-screen flex justify-center items-center bg-white dark:bg-gray-900'>
                 <div className="flex flex-col justify-center max-w-md p-6  sm:px-12 text-gray-900  dark:text-gray-100">
         <h1 className="font-bold text-4xl text-center mb-20">About Socia</h1>
-        <img src={Developer} alt="" className="w-48 h-48 mx-auto rounded-full dark:bg-gray-500 aspect-square" />
+        <LazyLoadImage  effect="blur" src={Developer} className="w-48 h-48 mx-auto rounded-full dark:bg-gray-500 aspect-square"/>
         <div className="space-y-4 text-center divide-y divide-gray-700">
             <div className="my-2 space-y-1">
                 <h2 className="text-xl font-semibold sm:text-2xl">MD Soliman Alam Soad</h2>

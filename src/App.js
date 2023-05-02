@@ -1,55 +1,61 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Authentication/Login';
-import Register from './pages/Authentication/Register';
-import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
-import EditProfile from './pages/Profile/EditProfile'
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 import PrivateRoute from './privateRoute/PrivateRoute';
-import PostPage from './pages/PostPage/PostPage';
-import Friends from './pages/Friends/Friends';
-import PageError from './pages/PageError/PageError';
-import About from './pages/about/About';
-import Message from './pages/Message/Message';
+import { lazy, Suspense } from 'react';
+import Spinner from './pages/Items/Spinner';
+
+const Login = lazy(()=> import('./pages/Authentication/Login'));
+const Register = lazy(()=> import('./pages/Authentication/Register'));
+const Home = lazy(()=>import('./pages/Home/Home'));
+const Profile = lazy(()=>import('./pages/Profile/Profile'));
+const EditProfile = lazy(()=>import('./pages/Profile/EditProfile'));
+const PostPage = lazy(()=>import('./pages/PostPage/PostPage'));
+const Friends = lazy(()=>import('./pages/Friends/Friends'));
+const PageError = lazy(()=>import('./pages/PageError/PageError'));
+const About = lazy(()=>import('./pages/about/About'));
+const Message = lazy(()=>import('./pages/Message/Message'));
 
 function App() {
   const route = createBrowserRouter([
 {
   path:'/',
-  element:<PrivateRoute><Home/></PrivateRoute>,
-  errorElement:<PageError/>
+  element: <Suspense fallback={<Spinner/>} ><PrivateRoute><Home/></PrivateRoute></Suspense>,
+  errorElement:<Suspense fallback={<Spinner/>} ><PageError/></Suspense>
 },
 {
   path:'/login',
-  element: <Login/>
+  element:<Suspense fallback={<Spinner/>} ><Login/></Suspense> 
 },
 {
   path:'/register',
-  element: <Register/>
+  element: <Suspense fallback={<Spinner/>} ><Register/></Suspense>
 },
 {
   path:'/profile/:id',
-  element:<PrivateRoute><Profile/></PrivateRoute>
+  element:<PrivateRoute><Suspense fallback={<Spinner/>} ><Profile/></Suspense></PrivateRoute>
 },
 {
   path:'/editProfile',
-  element:<PrivateRoute><EditProfile/></PrivateRoute>
+  element:<PrivateRoute><Suspense fallback={<Spinner/>} ><EditProfile/></Suspense></PrivateRoute>
 },
 {
   path:'/post/:id',
-  element:<PrivateRoute><PostPage/></PrivateRoute>
+  element:<PrivateRoute><Suspense fallback={<Spinner/>} ><PostPage/></Suspense></PrivateRoute>
 },
 {
   path:'/friends',
-  element:<PrivateRoute><Friends/></PrivateRoute>
+  element:<PrivateRoute><Suspense fallback={<Spinner/>} ><Friends/></Suspense></PrivateRoute>
 },
 {
   path:"/about",
-  element:<PrivateRoute><About/></PrivateRoute>
+  element:<PrivateRoute><Suspense fallback={<Spinner/>} ><About/></Suspense></PrivateRoute>
 },
 {
   path:'/message',
-  element:<Message/>
+  element:<Suspense fallback={<Spinner/>} ><Message/></Suspense>
 }
 
   ])

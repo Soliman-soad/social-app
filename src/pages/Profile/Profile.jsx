@@ -13,6 +13,7 @@ import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
 import Spinner from "../Items/Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Profile = () => {
@@ -114,11 +115,8 @@ const Profile = () => {
             className="w-full max-h-96"
           />
           <div>
-            <img
-              src={userData?.singleUserData?.photoURL}
-              className=" rounded-full w-[230px] h-[230px] object-cover -mt-40 ml-20"
-              alt=""
-            />
+          <LazyLoadImage effect="blur" src={userData?.singleUserData?.photoURL} className=" rounded-full w-[230px] h-[230px] object-cover -mt-40 ml-20"/>
+            
           </div>
         </div>
         <div>

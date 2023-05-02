@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ProfileContext } from "../../context/UserContext";
 import Spinner from "../Items/Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Rightbar = ({load,id}) => {
@@ -76,11 +77,7 @@ const Rightbar = ({load,id}) => {
                       <div className="flex items-center justify-between hover:bg-orange-500 hover:text-white hover:px-2 duration-100 my-2">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-md font-semibold flex items-center my-5 ">
-                            <img
-                              src={item?.singleUserData?.photoURL}
-                              alt=""
-                              className="rounded-full object-cover w-12 h-12 mr-2"
-                            />
+                           <LazyLoadImage  effect="blur" src={item?.singleUserData?.photoURL} className="rounded-full object-cover w-12 h-12 mr-2"/>
                             {item?.singleUserData?.displayName}
                           </div>
                         </Link>
@@ -133,11 +130,7 @@ const Rightbar = ({load,id}) => {
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-md font-semibold flex items-center my-5">
-                            <img
-                              src={item?.singleUserData?.photoURL}
-                              alt=""
-                              className="rounded-full object-cover w-12 h-12 mr-2"
-                            />
+                           <LazyLoadImage  effect="blur" src={item?.singleUserData?.photoURL} className="rounded-full object-cover w-12 h-12 mr-2"/>
                             {item?.singleUserData?.displayName}
                           </div>
                         </Link>

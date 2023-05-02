@@ -5,6 +5,7 @@ import { SlOptions } from "react-icons/sl";
 import { ImCross } from "react-icons/im";
 import { Link, useNavigate } from 'react-router-dom';
 import { ProfileContext } from '../../context/UserContext';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function Post({ item, setLiking}) {
     const {user} =useContext(ProfileContext);
@@ -50,7 +51,7 @@ export default function Post({ item, setLiking}) {
     <div className=' rounded-xl p-4 my-5 bg-white'>
         <div className='flex my-8 justify-between'>
         <div className='flex'>
-        <img src={userData?.singleUserData?.photoURL} alt="" className='rounded-full object-cover w-12 h-12'/>
+        <LazyLoadImage  effect="blur" src={userData?.singleUserData?.photoURL} className='rounded-full object-cover w-12 h-12'/>
             <div className='ml-2'>
                 <h2 className='font-semibold'>{userData?.singleUserData?.displayName}</h2>
                 <p>{(item?.createdAt)?.slice(0,10)}</p>
@@ -80,7 +81,8 @@ export default function Post({ item, setLiking}) {
                 item?.desc
             }
         </p>
-        <img src={item?.image} alt="" className='max-w-lg mx-auto my-5' />
+        <LazyLoadImage effect="blur" src={item?.image} className='max-w-lg mx-auto my-5'/>
+        
         <div className='grid grid-cols-2 justify-center text-lg font-semibold'>
             <div onClick={liker} className={`flex justify-center  duration-150 items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-orange-500 text-white": "bg-slate-200"}`}>
             <span className='hover:-rotate-45 hover:scale-125 duration-150'><AiFillLike/></span> Like ({(item?.likes)?.length})

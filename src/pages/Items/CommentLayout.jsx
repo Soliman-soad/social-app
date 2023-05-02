@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { ProfileContext } from '../../context/UserContext';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const CommentLayout = ({data, id, setPageLoad}) => {
     const [userData, setUserData] = useState(null);
@@ -30,7 +31,8 @@ const CommentLayout = ({data, id, setPageLoad}) => {
 	<div className="flex justify-between p-4">
 		<div className="flex space-x-4">
 			<div>
-				<img src={userData?.photoURL} alt="" className="object-cover w-12 h-12 rounded-full bg-gray-500" />
+            <LazyLoadImage  effect="blur" src={userData?.photoURL} className="object-cover w-12 h-12 rounded-full bg-gray-500"/>
+				
 			</div>
 			<div>
 				<h4 className="font-bold">{userData?.displayName}</h4>

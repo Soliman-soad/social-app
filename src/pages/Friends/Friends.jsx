@@ -6,6 +6,7 @@ import Footer from "../CommonItem/Footer";
 import Navber from "../CommonItem/Navber";
 import Sidebar from "../Home/Sidebar";
 import Spinner from "../Items/Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Friends = () => {
@@ -84,11 +85,8 @@ const Friends = () => {
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-md font-semibold flex items-center my-5">
-                            <img
-                              src={item?.singleUserData?.photoURL}
-                              alt=""
-                              className="rounded-full object-cover w-12 h-12 mr-2"
-                            />
+                           
+                            <LazyLoadImage  effect="blur" src={item?.singleUserData?.photoURL} className="rounded-full object-cover w-12 h-12 mr-2"/>className="rounded-full object-cover w-12 h-12 mr-2"
                             {item?.singleUserData?.displayName}
                           </div>
                         </Link>
@@ -132,11 +130,7 @@ const Friends = () => {
                       <div className="flex items-center justify-between">
                         <Link to={`/profile/${item?.singleUserData?.uid}`}>
                           <div className="text-md font-semibold flex items-center my-5">
-                            <img
-                              src={item?.singleUserData?.photoURL}
-                              alt=""
-                              className="rounded-full object-cover w-12 h-12 mr-2"
-                            />
+                           <LazyLoadImage  effect="blur" src={item?.singleUserData?.photoURL} className="rounded-full object-cover w-12 h-12 mr-2"/>                            
                             {item?.singleUserData?.displayName}
                           </div>
                         </Link>

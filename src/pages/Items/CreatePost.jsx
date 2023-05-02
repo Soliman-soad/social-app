@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./Spinner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const CreatePost = ({setPageLoader, pageLoader}) => {
   const {user} = useContext(ProfileContext);
   const [selectedFile, setSelectedFile] = useState();
@@ -103,7 +104,7 @@ if(loadPage){
       </div>
       <div>
         {
-          selectedFile && <img src={img} alt="" className='max-w-lg mx-auto my-5'/>
+          selectedFile && <LazyLoadImage  effect="blur" src={img} className='max-w-lg mx-auto my-5'/>
         }
         
       </div>
