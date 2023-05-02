@@ -8,7 +8,6 @@ import CommentLayout from "../Items/CommentLayout";
 import Post from "../Items/Post";
 import Footer from "../CommonItem/Footer"
 import Spinner from "../Items/Spinner";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const PostPage = () => {
     const {user} = useContext(ProfileContext)
@@ -71,8 +70,7 @@ const PostPage = () => {
             <Post item={item} profileUser={item?.userId} setLiking={setPageLoad}/>
             <div className="bg-gray-200 px-16 py-10">
             <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 bg-white px-8 mb-5">
-            <LazyLoadImage  effect="blur" src={user.photoURL} className="w-14 h-14 rounded-full object-cover border-2 border-orange-500"/>
-                
+                <img src={user.photoURL} alt="" className="w-14 h-14 rounded-full object-cover border-2 border-orange-500" />
         <input type="text" name="text" placeholder="Write your comment" className="px-3 bg-slate-200 rounded-md w-full ml-2 border mr-2 active:border-orange-500 py-2"/>
         <button type="submit" className="btn bg-orange-500 text-white rounded-md px-3 py-2  text-lg">Comment </button>
             </form>
