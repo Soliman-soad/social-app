@@ -68,7 +68,7 @@ const Friends = () => {
              <Spinner />             
            </div>
               :
-              <div className="md:col-span-9 px-10 py-8 min-h-screen">
+              <div className="md:col-span-9 md:px-10 md:py-8 p-3 min-h-screen">
           <div className="border-b mb-5">
             <h3 className="text-xl font-semibold">Following:</h3>
             {

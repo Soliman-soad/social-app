@@ -27,8 +27,8 @@ const CommentLayout = ({data, id, setPageLoad}) => {
         .catch(err => console.log(err))
     }
     return (
-        <div className="container flex flex-col w-11/12 p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800 md:my-10 my-8">
-	<div className="flex justify-between p-4">
+        <div className="container flex flex-col md:w-11/12 md:p-6 p-3 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800 md:my-10 ">
+	<div className="flex justify-between md:p-4 p-2">
 		<div className="flex space-x-4">
 			<div>
             <LazyLoadImage  effect="blur" src={userData?.photoURL} className="object-cover w-12 h-12 rounded-full bg-gray-500"/>

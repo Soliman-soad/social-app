@@ -75,12 +75,12 @@ const Login = () => {
         <form onSubmit={handleSubmit(formSubmit)}>
         <div className="mb-5">
             <label htmlFor="email" className="block mb-2 font-semibold">Email</label>
-            <input placeholder="Enter your email" {...register("email", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
+            <input defaultValue={`example@gmail.com`} placeholder="Enter your email" {...register("email", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">{errors.email.message}</span>}
           </div>
           <div className="mb-5">
             <label htmlFor="password" className="block mb-2 font-semibold">password</label>
-            <input placeholder="Enter your password" type="password"  {...register("password", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
+            <input placeholder="Enter your password" defaultValue={`admin123`} type="password"  {...register("password", {required: true})} className="w-full p-3 bg-gray-200 rounded-sm"/>
             {errors.exampleRequired && <span className="text-red-500">{errors.password.message}</span>}
           </div>
           {errorMessage ? <p className="text-red-500 text-sm">{errorMessage}</p>:<></>}

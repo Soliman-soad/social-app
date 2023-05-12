@@ -47,14 +47,14 @@ const PostPage = () => {
         .catch(err => console.log(err))
         }
     }
-    console.log(item)
+    
   return (
     <>
       <div className="sticky top-0 w-full z-10">
         <Navber />
       </div>
       <div className="grid grid-cols-12">
-        <div className="col-span-3  ">
+        <div className="col-span-3 hidden md:block ">
           <div className="sticky top-20 min-h-screen border-r-2  w-full bg-gray-50">
             <Sidebar />
           </div>
@@ -66,20 +66,20 @@ const PostPage = () => {
              <Spinner />             
            </div>
           :
-        <div className="col-span-9">
+        <div className="col-span-12 md:col-span-9">
             <Post item={item} profileUser={item?.userId} setLiking={setPageLoad}/>
-            <div className="bg-gray-200 px-16 py-10">
-            <form onSubmit={handleForm} className="flex border-t border-gray-200 py-8 bg-white px-8 mb-5">
-                <img src={user.photoURL} alt="" className="w-14 h-14 rounded-full object-cover border-2 border-orange-500" />
+            <div className="bg-gray-200 p-4 md:px-16 md:py-10">
+            <form onSubmit={handleForm} className="md:flex border-t border-gray-200 py-4 bg-white md:px-8 px-4 md:py-8 mb-5">
+                <img src={user.photoURL} alt="" className="w-14 h-14 hidden md:block rounded-full object-cover border-2 border-orange-500" />
         <input type="text" name="text" placeholder="Write your comment" className="px-3 bg-slate-200 rounded-md w-full ml-2 border mr-2 active:border-orange-500 py-2"/>
-        <button type="submit" className="btn bg-orange-500 text-white rounded-md px-3 py-2  text-lg">Comment </button>
+        <button type="submit" className="btn bg-orange-500 text-white mx-auto mt-3 md:mt-0 rounded-md px-3 py-2  text-lg">Comment </button>
             </form>
             <h3 className="text-xl font-semibold">
                 All comments:
             </h3>
             {
                 item?.comments?.map((data,i)=>{
-                    return <CommentLayout data={data} id={id} setPageLoad={setPageLoad}/>
+                    return <CommentLayout key={i} data={data} id={id} setPageLoad={setPageLoad}/>
                 })
             }
             </div>

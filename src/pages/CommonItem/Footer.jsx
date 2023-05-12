@@ -4,12 +4,12 @@ import { FaEarlybirds, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <div className='text-white bg-gray-800 p-16 flex items-center mx-auto justify-center'>
-            <div className='border-r-2 border-white pr-10'>
-            <h2 className='flex items-center text-4xl font-semibold text-slate-100'><FaEarlybirds/> socia</h2>
+        <div className='text-white bg-gray-800 p-16 flex flex-col md:flex-row items-center mx-auto justify-center'>
+            <div className='md:border-r-2 border-white pr-10 text-center md:text-left'>
+            <h2 className='flex justify-center md:justify-items-start items-center text-4xl font-semibold text-slate-100'><FaEarlybirds/> socia</h2>
             <p>social media to connect everyone</p>
             </div>
-            <div className='ml-10'>
+            <div className='md:ml-10 text-center md:text-left'>
                 <h1 className='text-xl font-bold'>
                     Md Soliman Alam
                 </h1>

@@ -81,7 +81,9 @@ export default function Post({ item, setLiking}) {
                 item?.desc
             }
         </p>
-        <LazyLoadImage effect="blur" src={item?.image} className='max-w-lg mx-auto my-5'/>
+        <div className='max-w-lg mx-auto'>            
+        <LazyLoadImage effect="blur" src={item?.image} className='object-cover mx-auto my-5'/>
+        </div>
         
         <div className='grid grid-cols-2 justify-center text-lg font-semibold'>
             <div onClick={liker} className={`flex justify-center  duration-150 items-center cursor-pointer  p-1 rounded-full mx-2 ${(item?.likes)?.includes(user?.uid) ? "bg-orange-500 text-white": "bg-slate-200"}`}>

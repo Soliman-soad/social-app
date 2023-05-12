@@ -104,7 +104,7 @@ if(loadPage){
       </div>
       <div>
         {
-          selectedFile && <LazyLoadImage  effect="blur" src={img} className='max-w-lg mx-auto my-5'/>
+          selectedFile && <LazyLoadImage  effect="blur" src={img} className='object-cover mx-auto my-5'/>
         }
         
       </div>
