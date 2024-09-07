@@ -14,7 +14,7 @@ export default function Post({ item, setLiking}) {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${item?.userId}`)
+        axios.get(`https://social-app-server-three.vercel.app/api/users/${item?.userId}`)
         .then(data => {
           setUserData(data.data)
           
@@ -24,7 +24,7 @@ export default function Post({ item, setLiking}) {
     },[item])
     const deletePost = () =>{
         
-        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/delete`,{
+        axios.put(`https://social-app-server-three.vercel.app/api/post/${item._id}/delete`,{
             userId: user?.uid
         })
         .then(data => {
@@ -36,7 +36,7 @@ export default function Post({ item, setLiking}) {
     }
     
         const liker =()=>{
-            axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${item._id}/like`,
+            axios.put(`https://social-app-server-three.vercel.app/api/post/${item._id}/like`,
             {
                 userId : user?.uid
             }

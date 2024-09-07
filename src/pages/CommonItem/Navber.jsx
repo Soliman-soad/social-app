@@ -22,7 +22,7 @@ export default function Navber() {
   }
 
   useEffect(()=>{
-    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/allUser`)
+    axios.get(`https://social-app-server-three.vercel.app/api/users/${user?.uid}/allUser`)
     .then(data => setUsers(data?.data))
     .catch(err => console.log(err))
 

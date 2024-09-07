@@ -8,7 +8,7 @@ const CommentLayout = ({data, id, setPageLoad}) => {
     const [userData, setUserData] = useState(null);
     const{user} =useContext(ProfileContext)
     useEffect(()=>{
-        axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${data?.user}`)
+        axios.get(`https://social-app-server-three.vercel.app/api/users/${data?.user}`)
         .then(data => {
           setUserData(data.data.singleUserData)
           console.log(data.data.singleUserData)
@@ -18,7 +18,7 @@ const CommentLayout = ({data, id, setPageLoad}) => {
     },[])
 
     const handleDeleteComment =()=>{
-        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${id}/deleteComment`,{
+        axios.put(`https://social-app-server-three.vercel.app/api/post/${id}/deleteComment`,{
             user: userData?.uid,
             comment: data?.comment,
             createdAt: data?.createdAt

@@ -32,7 +32,7 @@ const CreatePost = ({setPageLoader, pageLoader}) => {
     // ------------------------------
   if(data.data.data.url){
     setImg(data.data.data.url)
-    axios.post('https://social-app-server-soliman-soad.vercel.app/api/post/',{
+    axios.post('https://social-app-server-three.vercel.app/api/post/',{
       userId: user?.uid,
       image: data.data.data.url,
       desc: postText ? postText : ''
@@ -51,7 +51,7 @@ const CreatePost = ({setPageLoader, pageLoader}) => {
   .catch(err => console.log(err))
     }
     if(data.desc){
-      axios.post('https://social-app-server-soliman-soad.vercel.app/api/post/',{
+      axios.post('https://social-app-server-three.vercel.app/api/post/',{
       userId: user?.uid,
       image: "",
       desc: postText ? postText : ''

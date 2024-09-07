@@ -18,7 +18,7 @@ const PostPage = () => {
     const [loader, setLoader] = useState(true)
 
     useEffect(()=>{
-        axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/timelinePost/${id}`)
+        axios.get(`https://social-app-server-three.vercel.app/api/post/timelinePost/${id}`)
         .then(data =>{
             setItem(data?.data)             
             setLoader(false)
@@ -35,7 +35,7 @@ const PostPage = () => {
         e.preventDefault();
         const text = e.target.text.value;
         if(text){
-            axios.put(`https://social-app-server-soliman-soad.vercel.app/api/post/${id}/comment`,{
+            axios.put(`https://social-app-server-three.vercel.app/api/post/${id}/comment`,{
             user: user?.uid,
             comment: text,
             createdAt: item?.createdAt

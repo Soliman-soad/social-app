@@ -17,7 +17,7 @@ const Profile = () => {
 
   useEffect(()=>{
     if(user.uid){
-      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`)
+      axios.get(`https://social-app-server-three.vercel.app/api/users/${user.uid}`)
       .then(data => {
         console.log(data.data)
         setUserData(data.data)
@@ -44,7 +44,7 @@ const Profile = () => {
       .then(dataItem => {
         changeProfile(data.name ? data.name: user?.displayName,dataItem.data.data.url)
       .then(()=>{
-        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
+        axios.put(`https://social-app-server-three.vercel.app/api/users/${user.uid}`,{
         "singleUserData":user,
         "uId": user.uid
     }
@@ -68,7 +68,7 @@ const Profile = () => {
           setLoadPage(true)
           changeProfile(data.name ,user.photoURL)
       .then(()=>{
-        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
+        axios.put(`https://social-app-server-three.vercel.app/api/users/${user.uid}`,{
         "singleUserData":user,
         "uId": user.uid
     }
@@ -87,7 +87,7 @@ const Profile = () => {
 
       if(data.location){
         setLoadPage(true)
-        axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}`,{
+        axios.put(`https://social-app-server-three.vercel.app/api/users/${user.uid}`,{
         "city": data?.location ? data.location: user?.city,
         "uId": user.uid
     }

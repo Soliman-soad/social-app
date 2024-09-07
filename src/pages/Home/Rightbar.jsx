@@ -15,7 +15,7 @@ const Rightbar = ({load,id}) => {
 
   useEffect(() => {
     axios.get(
-        `https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/allUser`
+        `https://social-app-server-three.vercel.app/api/users/${user?.uid}/allUser`
       )
       .then((data) => {
         setUsers(data?.data)
@@ -26,7 +26,7 @@ const Rightbar = ({load,id}) => {
 
   useEffect(() => {
     axios.get(
-        `https://social-app-server-soliman-soad.vercel.app/api/users/${id}`
+        `https://social-app-server-three.vercel.app/api/users/${id}`
       )
       .then((data) => {
         setCurrentProfile(data.data);
@@ -39,7 +39,7 @@ const Rightbar = ({load,id}) => {
   const handleFollow = (Friend) => {
     setPageLoader(true)
     axios.put(
-        `https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}/follow`,
+        `https://social-app-server-three.vercel.app/api/users/${user?.uid}/follow`,
         {
           userId: Friend,
         }

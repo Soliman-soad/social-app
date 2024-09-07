@@ -10,7 +10,7 @@ export default function Newsfeed({pageloader}) {
   const [liking, setLiking] = useState(null);
   const [loader, setLoader] = useState(true)
   useEffect(()=>{
-    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/allTimeline/${user.uid}`)
+    axios.get(`https://social-app-server-three.vercel.app/api/post/allTimeline/${user.uid}`)
     .then(data=>{
       setPostData(data.data);
       setLoader(false);

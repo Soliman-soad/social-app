@@ -16,7 +16,7 @@ export default function Home() {
   const [pageLoader, setPageLoader] =useState(false);
   useEffect(()=>{
     setLoader(true)
-    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user?.uid}`)
+    axios.get(`https://social-app-server-three.vercel.app/api/users/${user?.uid}`)
       .then(data => {
         setUserData(data.data);
         setLoader(false)

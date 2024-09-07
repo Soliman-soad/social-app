@@ -27,7 +27,7 @@ const Profile = () => {
   const [loader, setLoader] = useState(true);
 
   useEffect(()=>{
-    axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/allUser`)
+    axios.get(`https://social-app-server-three.vercel.app/api/users/${user.uid}/allUser`)
     .then(data => setUsers(data?.data))
     .catch(err => console.log(err))
   },[])
@@ -36,7 +36,7 @@ const Profile = () => {
 
   useEffect(()=>{
     if(user.uid){
-      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/users/${id}`)
+      axios.get(`https://social-app-server-three.vercel.app/api/users/${id}`)
       .then(data => {
         
         if(data.data){
@@ -55,7 +55,7 @@ const Profile = () => {
 
   useEffect(()=>{
     if(user.uid){
-      axios.get(`https://social-app-server-soliman-soad.vercel.app/api/post/profile/${id}`)
+      axios.get(`https://social-app-server-three.vercel.app/api/post/profile/${id}`)
       .then(data => {        
         setPostItem(data.data)
         setLoader(false)
@@ -68,7 +68,7 @@ const Profile = () => {
   },[id, user])
 
   const handleFollow = (Friend) =>{
-    axios.put(`https://social-app-server-soliman-soad.vercel.app/api/users/${user.uid}/follow`,{
+    axios.put(`https://social-app-server-three.vercel.app/api/users/${user.uid}/follow`,{
       userId : Friend
     })
     .then(data=> {

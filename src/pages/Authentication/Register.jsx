@@ -42,7 +42,7 @@ const Register = () => {
       update(name,data.data.data.url);
       changeProfile(name,data.data.data.url)
     .then(()=>{
-      axios.post("https://social-app-server-soliman-soad.vercel.app/api/auth/register",{
+      axios.post("https://social-app-server-three.vercel.app/api/auth/register",{
         singleUserData: user,
     "uId": user.uid,
     "city": data.location
